@@ -10,8 +10,12 @@
         <div class="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--vibe-yellow-light)] blur-[150px] opacity-10" />
       </div>
       <div class="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
-        <div class="logo-pulse mx-auto mb-8 w-fit">
-          <img :src="placeholderImage" alt="SPEL6" class="mx-auto h-32 w-auto" />
+        <div class="logo-pulse mx-auto mb-4 w-fit">
+          <img
+            :src="spel6Logo"
+            alt="SPEL6"
+            class="mx-auto h-auto w-full max-w-[240px] sm:max-w-[300px] lg:max-w-[360px]"
+          />
         </div>
         <h1 class="mx-auto mb-6 max-w-4xl text-4xl font-semibold leading-tight text-white md:text-6xl">
           Het ultieme partyspel voor onvergetelijke momenten
@@ -152,7 +156,7 @@
       <div class="relative mx-auto max-w-5xl text-center">
         <div class="relative mx-auto mb-12 h-64 w-64">
           <div class="animated-gradient absolute inset-0 rounded-full opacity-40 blur-2xl" />
-          <img :src="placeholderImage" alt="SPEL6 Promo" class="relative h-full w-full object-contain drop-shadow-2xl" />
+          <img :src="spel6Logo" alt="SPEL6 Promo" class="relative h-full w-full object-contain drop-shadow-2xl" />
         </div>
         <h2 class="mb-6 text-3xl font-semibold text-white">Klaar voor het feest?</h2>
         <p class="mx-auto mb-8 max-w-3xl text-xl text-gray-300">
@@ -251,7 +255,7 @@
 import { Apple, Check, Mail, MapPin, Phone, Play } from "lucide-vue-next";
 import { ref } from "vue";
 
-const placeholderImage = "http://localhost:8000/storage/placeholder.svg";
+const spel6Logo = useStorageAsset("storage/spel6logo.png");
 
 const stores = [
   { icon: Apple, label: "App Store", subtext: "Download op de", cta: "Download nu - Gratis" },

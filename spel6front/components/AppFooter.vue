@@ -2,12 +2,24 @@
   <footer class="border-t border-white/10 bg-black text-gray-400">
     <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <div class="mb-8 grid grid-cols-1 gap-8 md:grid-cols-4">
-        <div class="md:col-span-2">
-          <img :src="placeholderImage" alt="SPEL6" class="mb-4 h-16 w-auto" />
-          <p class="max-w-md text-sm text-gray-300">
+        <div class="flex flex-col items-start gap-4 md:col-span-2">
+          <div class="logo-pulse -mb-2 sm:-mb-3">
+            <img
+              :src="spel6Logo"
+              alt="SPEL6"
+              class="h-16 w-auto sm:h-20 lg:h-24"
+            />
+          </div>
+          <p class="max-w-lg text-sm text-gray-300">
             Het ultieme partyspel voor jou en je vrienden. Maak de gekste
             momenten en deel de beste verhalen.
           </p>
+          <NuxtLink
+            to="/contact"
+            class="cta-animated inline-flex items-center gap-2 rounded-xl px-5 py-2 text-sm font-semibold text-white transition-transform duration-200 hover:scale-105"
+          >
+            Neem contact op
+          </NuxtLink>
         </div>
 
         <div>
@@ -73,7 +85,7 @@
 <script setup lang="ts">
 import { Facebook, Instagram, Twitter } from "lucide-vue-next";
 
-const placeholderImage = "http://localhost:8000/storage/placeholder.svg";
+const spel6Logo = useStorageAsset("storage/spel6logo.png");
 
 const quickLinks = [
   { label: "Shop", path: "/shop", disabled: true },

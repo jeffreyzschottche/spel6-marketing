@@ -7,8 +7,8 @@
   >
     <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
       <NuxtLink to="/" class="flex items-center gap-3">
-        <div class="logo-pulse rounded-full bg-white/5 p-2">
-          <img :src="placeholderImage" alt="SPEL6" class="h-12 w-auto" />
+        <div class="logo-pulse p-1 sm:p-1.5">
+          <img :src="spel6Logo" alt="SPEL6" class="h-12 w-auto sm:h-14 lg:h-16" />
         </div>
       </NuxtLink>
 
@@ -74,7 +74,7 @@ import { Menu, X } from "lucide-vue-next";
 import { onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useRoute } from "#imports";
 
-const placeholderImage = "http://localhost:8000/storage/placeholder.svg";
+const spel6Logo = useStorageAsset("storage/spel6logo.png");
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "Shop", path: "/shop", disabled: true },

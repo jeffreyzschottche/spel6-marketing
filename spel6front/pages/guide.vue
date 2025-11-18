@@ -103,11 +103,11 @@
         <h3 class="mb-4 text-white">Nog vragen?</h3>
         <p class="mb-6 text-gray-300">Bekijk onze FAQ of neem contact met ons op</p>
         <div class="flex flex-col justify-center gap-4 sm:flex-row">
-          <NuxtLink class="rounded-xl bg-white/10 px-6 py-3 text-white transition-colors hover:bg-white/20" to="/faq">
+          <NuxtLink class="cta-animated inline-flex items-center justify-center rounded-xl px-6 py-3 text-white transition-transform duration-200 hover:scale-105" to="/faq">
             Naar FAQ
           </NuxtLink>
           <NuxtLink
-            class="rounded-xl bg-gradient-to-r from-[var(--vibe-green-light)] to-[var(--vibe-blue-light)] px-6 py-3 text-white transition-opacity hover:opacity-90"
+            class="cta-animated inline-flex items-center justify-center rounded-xl px-6 py-3 text-white transition-transform duration-200 hover:scale-105"
             to="/contact"
           >
             Contact

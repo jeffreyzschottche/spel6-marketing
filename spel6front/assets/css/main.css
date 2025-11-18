@@ -85,6 +85,38 @@ html.font-scale-large body {
   animation: vibeShift 8s ease infinite;
 }
 
+.cta-animated {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  z-index: 0;
+  color: #fff;
+}
+
+.cta-animated::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    270deg,
+    var(--vibe-red-light),
+    var(--vibe-yellow-light),
+    var(--vibe-green-light),
+    var(--vibe-blue-light),
+    var(--vibe-red-light)
+  );
+  background-size: 800% 800%;
+  animation: vibeShift 8s ease infinite;
+  z-index: -1;
+  transition: animation-play-state 0.2s ease;
+}
+
+.cta-animated:hover::before,
+.cta-animated:focus-visible::before {
+  animation-play-state: paused;
+}
+
 .page-enter-active,
 .page-leave-active {
   transition: all 0.4s;

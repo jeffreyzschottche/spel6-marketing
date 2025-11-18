@@ -48,7 +48,7 @@
       <section class="rounded-2xl border border-white/10 bg-gradient-to-r from-[var(--vibe-yellow-light)]/10 to-[var(--vibe-red-light)]/10 p-8 text-center">
         <h3 class="mb-4 text-2xl font-semibold text-white">Vragen over deze voorwaarden?</h3>
         <p class="mb-6 text-sm text-gray-300">Neem contact met ons op voor toelichting of hulp.</p>
-        <NuxtLink class="rounded-xl bg-gradient-to-r from-[var(--vibe-yellow-light)] to-[var(--vibe-blue-light)] px-8 py-3 text-sm font-semibold text-white transition hover:opacity-90" to="/contact">
+        <NuxtLink class="cta-animated inline-flex items-center justify-center rounded-xl px-8 py-3 text-sm font-semibold text-white transition-transform duration-200 hover:scale-105" to="/contact">
           Contacteer ons
         </NuxtLink>
       </section>

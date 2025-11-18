@@ -47,7 +47,7 @@
           <div class="mt-12 rounded-2xl border border-white/10 bg-gradient-to-br from-[var(--vibe-blue-light)]/10 to-[var(--vibe-red-light)]/10 p-6">
             <h3 class="text-lg font-semibold text-white">Veelgestelde vragen?</h3>
             <p class="mt-2 text-sm text-gray-400">Bekijk eerst onze FAQ pagina, wellicht staat je vraag daar al beantwoord.</p>
-            <NuxtLink class="mt-4 inline-block rounded-lg bg-white/10 px-6 py-2 text-sm text-white transition hover:bg-white/20" to="/faq">
+            <NuxtLink class="cta-animated mt-4 inline-flex items-center justify-center rounded-lg px-6 py-2 text-sm text-white transition-transform duration-200 hover:scale-105" to="/faq">
               Naar FAQ
             </NuxtLink>
           </div>
@@ -112,7 +112,7 @@
               <button
                 type="submit"
                 :disabled="isSubmitting"
-                class="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[var(--vibe-green-light)] to-[var(--vibe-blue-light)] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-60"
+                class="cta-animated flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-3 text-sm font-semibold text-white transition-transform duration-200 hover:scale-105 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
               >
                 <Send class="h-5 w-5" />
                 <span>{{ isSubmitting ? "Versturen..." : "Verstuur bericht" }}</span>

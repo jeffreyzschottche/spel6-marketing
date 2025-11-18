@@ -13,7 +13,7 @@
       <section class="space-y-12">
         <article v-for="category in faqSections" :key="category.category">
           <h2 class="mb-6 flex items-center gap-3 text-2xl font-semibold">
-            <span class="h-1 w-8 rounded-full bg-gradient-to-r from-[var(--vibe-green-light)] to-[var(--vibe-blue-light)]" />
+            <span class="animated-gradient h-1 w-8 rounded-full" />
             {{ category.category }}
           </h2>
           <div class="space-y-4">
@@ -47,7 +47,7 @@
         <h3 class="text-2xl font-semibold">Staat je vraag er niet tussen?</h3>
         <p class="mt-4 text-sm text-gray-300">Neem contact met ons op en we helpen je graag verder!</p>
         <NuxtLink
-          class="mt-6 inline-block rounded-xl bg-gradient-to-r from-[var(--vibe-green-light)] to-[var(--vibe-blue-light)] px-8 py-3 text-sm font-semibold transition hover:opacity-90"
+          class="cta-animated mt-6 inline-flex items-center justify-center rounded-xl px-8 py-3 text-sm font-semibold text-white transition-transform duration-200 hover:scale-105"
           to="/contact"
         >
           Neem contact op
