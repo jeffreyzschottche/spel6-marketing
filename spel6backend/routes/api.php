@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,3 +19,4 @@ Route::get('/greet', function () {
 });
 
 Route::get('/pages/{page}/content', [ContentController::class, 'show']);
+Route::post('/contact', ContactController::class);

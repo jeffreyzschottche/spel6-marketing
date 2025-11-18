@@ -55,50 +55,71 @@
 
         <section>
           <h2 class="mb-8 text-2xl font-semibold text-white">Stuur ons een bericht</h2>
-          <form class="space-y-6">
+          <form class="space-y-6" @submit.prevent="submitForm">
             <div>
               <label class="mb-2 block text-sm font-medium text-white" for="name">Naam</label>
               <input
                 id="name"
+                v-model="form.name"
                 class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-gray-500"
+                :class="{ 'border-red-500/60': fieldErrors?.name }"
                 placeholder="Je naam"
                 type="text"
+                required
               />
+              <p v-if="fieldErrors?.name" class="mt-2 text-xs text-red-400">{{ fieldErrors.name[0] }}</p>
             </div>
             <div>
               <label class="mb-2 block text-sm font-medium text-white" for="email">Email</label>
               <input
                 id="email"
+                v-model="form.email"
                 class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-gray-500"
+                :class="{ 'border-red-500/60': fieldErrors?.email }"
                 placeholder="je@email.nl"
                 type="email"
+                required
               />
+              <p v-if="fieldErrors?.email" class="mt-2 text-xs text-red-400">{{ fieldErrors.email[0] }}</p>
             </div>
             <div>
               <label class="mb-2 block text-sm font-medium text-white" for="subject">Onderwerp</label>
               <input
                 id="subject"
+                v-model="form.subject"
                 class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-gray-500"
+                :class="{ 'border-red-500/60': fieldErrors?.subject }"
                 placeholder="Waar gaat je bericht over?"
                 type="text"
+                required
               />
+              <p v-if="fieldErrors?.subject" class="mt-2 text-xs text-red-400">{{ fieldErrors.subject[0] }}</p>
             </div>
             <div>
               <label class="mb-2 block text-sm font-medium text-white" for="message">Bericht</label>
               <textarea
                 id="message"
+                v-model="form.message"
                 class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-gray-500"
+                :class="{ 'border-red-500/60': fieldErrors?.message }"
                 placeholder="Je bericht..."
                 rows="6"
+                required
               ></textarea>
+              <p v-if="fieldErrors?.message" class="mt-2 text-xs text-red-400">{{ fieldErrors.message[0] }}</p>
             </div>
-            <button
-              type="button"
-              class="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[var(--vibe-green-light)] to-[var(--vibe-blue-light)] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
-            >
-              <Send class="h-5 w-5" />
-              Verstuur bericht
-            </button>
+            <div class="space-y-3">
+              <button
+                type="submit"
+                :disabled="isSubmitting"
+                class="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[var(--vibe-green-light)] to-[var(--vibe-blue-light)] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-60"
+              >
+                <Send class="h-5 w-5" />
+                <span>{{ isSubmitting ? "Versturen..." : "Verstuur bericht" }}</span>
+              </button>
+              <p v-if="successMessage" class="text-sm text-green-400">{{ successMessage }}</p>
+              <p v-if="errorMessage" class="text-sm text-red-400">{{ errorMessage }}</p>
+            </div>
           </form>
         </section>
       </div>
@@ -108,5 +129,62 @@
 </template>
 
 <script setup lang="ts">
+import { reactive, ref } from "vue";
 import { Mail, MapPin, Phone, Send } from "lucide-vue-next";
+import { apiFetch } from "~/services/apiFetch";
+import { ApiError } from "~/services/ApiError";
+
+const form = reactive({
+  name: "",
+  email: "",
+  subject: "",
+  message: "",
+});
+
+const isSubmitting = ref(false);
+const successMessage = ref("");
+const errorMessage = ref("");
+const fieldErrors = ref<Record<string, string[]> | null>(null);
+
+const resetFeedback = () => {
+  successMessage.value = "";
+  errorMessage.value = "";
+  fieldErrors.value = null;
+};
+
+const submitForm = async () => {
+  resetFeedback();
+  isSubmitting.value = true;
+
+  try {
+    await apiFetch("/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+
+    successMessage.value = "Bedankt! We nemen zo snel mogelijk contact met je op.";
+    form.name = "";
+    form.email = "";
+    form.subject = "";
+    form.message = "";
+  } catch (err) {
+    if (err instanceof ApiError) {
+      const validationErrors = err.data?.errors;
+      if (validationErrors) {
+        fieldErrors.value = validationErrors;
+        errorMessage.value = "Controleer de invoer en probeer het opnieuw.";
+      } else {
+        errorMessage.value =
+          err.data?.message ??
+          "Er is iets misgegaan bij het versturen. Probeer het later nog eens.";
+      }
+    } else {
+      errorMessage.value =
+        "Er is iets misgegaan bij het versturen. Probeer het later nog eens.";
+    }
+  } finally {
+    isSubmitting.value = false;
+  }
+};
 </script>
