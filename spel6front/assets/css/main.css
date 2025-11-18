@@ -1,0 +1,161 @@
+@import "tailwindcss";
+@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --vibe-green-light: #279d62;
+  --vibe-green-dark: #21593e;
+
+  --vibe-yellow-light: #ff8a2b;
+  --vibe-yellow-dark: #c36e2d;
+
+  --vibe-blue-light: #7b5cf3;
+  --vibe-blue-dark: #5f45c0;
+
+  --vibe-red-light: #c84145;
+  --vibe-red-dark: #9e3438;
+
+  --light-background: #1a1a1a;
+}
+
+html.font-scale-large {
+  font-size: 18px;
+}
+
+html.font-scale-large body {
+  font-size: inherit;
+}
+
+.light-background {
+  background-color: var(--light-background);
+}
+
+.vibe-green-light {
+  background-color: var(--vibe-green-light);
+}
+.vibe-green-dark {
+  background-color: var(--vibe-green-dark);
+}
+
+.vibe-yellow-light {
+  background-color: var(--vibe-yellow-light);
+}
+.vibe-yellow-dark {
+  background-color: var(--vibe-yellow-dark);
+}
+
+.vibe-blue-light {
+  background-color: var(--vibe-blue-light);
+}
+.vibe-blue-dark {
+  background-color: var(--vibe-blue-dark);
+}
+
+.vibe-red-light {
+  background-color: var(--vibe-red-light);
+}
+.vibe-red-dark {
+  background-color: var(--vibe-red-dark);
+}
+
+@keyframes vibeShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-gradient {
+  background: linear-gradient(
+    270deg,
+    var(--vibe-red-light),
+    var(--vibe-yellow-light),
+    var(--vibe-green-light),
+    var(--vibe-blue-light),
+    var(--vibe-red-light)
+  );
+  background-size: 800% 800%;
+  animation: vibeShift 8s ease infinite;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+
+.setup-wrapper {
+  width: min(90vw, var(--setup-max-width, 960px));
+  margin: 0 auto;
+}
+
+.logo-pulse {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.logo-pulse img {
+  display: block;
+  position: relative;
+  z-index: 1;
+  animation: logo-flip 15s ease-in-out infinite;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.45s;
+  position: fixed;
+  inset: 0;
+}
+
+.slide-enter-from {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.slide-leave-to {
+  opacity: 0;
+  transform: translateY(-24px);
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.25s, transform 0.25s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+@keyframes logo-flip {
+  0%,
+  48% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+  52% {
+    transform: rotateY(360deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
