@@ -60,7 +60,7 @@
               Veelgestelde vragen?
             </h3>
             <p class="mt-2 text-sm text-gray-400">
-              Bekijk eerst onze FAQ pagina, wellicht staat je vraag daar al
+              Bekijk eerst onze FAQ pagina, wellicht is je vraag daar al
               beantwoord.
             </p>
             <NuxtLink
