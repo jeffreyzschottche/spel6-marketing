@@ -33,8 +33,8 @@
           Het ultieme partyspel voor onvergetelijke momenten
         </h1>
         <p class="mx-auto mb-12 max-w-3xl text-xl text-gray-300">
-          Kies je sfeer, speel met je crew en maak van elke avond een feest.
-          Duizenden vragen, eindeloos plezier.
+          Kies je sfeer en gamemodes, speel met je crew en maak van elke avond
+          een feest. Duizenden vragen, duizenden opdrachten eindeloos plezier.
         </p>
         <div class="mb-8 flex flex-col justify-center gap-4 sm:flex-row">
           <a
@@ -68,12 +68,12 @@
         </div>
         <div>
           <h2 class="mb-6 text-3xl font-semibold text-white">
-            Spelen met je vrienden
+            Partyspel voor met je vrienden
           </h2>
           <p class="mb-6 text-lg text-gray-300">
             SPEL6 brengt je dichter bij je vrienden dan ooit tevoren. Met
-            duizenden vragen en uitdagingen leer je elkaar op een compleet
-            nieuwe manier kennen.
+            duizenden vragen en opdrachten leer je elkaar op een compleet nieuwe
+            manier kennen terwijl je super veel lol hebt.
           </p>
           <ul class="space-y-4">
             <li
@@ -101,9 +101,10 @@
             Altijd en overal
           </h2>
           <p class="mb-6 text-lg text-gray-300">
-            Of je nu thuis bent, op stap of bij vrienden - SPEL6 gaat overal mee
-            naartoe. Start een nieuw spel in seconden en duik direct in de
-            actie.
+            Of je nu op een date bent, op een feestje, werk of bij vrienden,
+            SPEL6 gaat overal mee naartoe. Het is beschikbaar in het Nederlands,
+            Duits en Engels. Met verschillende game modes, vibes en filters
+            creer je het perfecte spel voor het juiste moment.
           </p>
           <ul class="space-y-4">
             <li
@@ -150,9 +151,13 @@
             class="relative w-full cursor-pointer overflow-hidden rounded-3xl border-[6px] text-white shadow-xl transition-transform duration-200 hover:-translate-y-1"
             :class="mode.surface"
           >
-            <div class="relative z-10 flex min-h-[11rem] flex-col justify-between p-5">
+            <div
+              class="relative z-10 flex min-h-[11rem] flex-col justify-between p-5"
+            >
               <div class="mt-1 pr-8">
-                <p class="text-xs font-semibold uppercase tracking-wide text-white/70">
+                <p
+                  class="text-xs font-semibold uppercase tracking-wide text-white/70"
+                >
                   {{ mode.tagline }}
                 </p>
                 <h3 class="mt-1 text-lg font-bold text-white">
@@ -203,8 +208,9 @@
       <div class="mx-auto max-w-5xl text-center">
         <h2 class="text-3xl font-semibold text-white">Voor elk moment</h2>
         <p class="mt-4 text-xl text-gray-300">
-          Kies de perfecte sfeer voor jouw avond en laat SPEL6 automatisch de
-          juiste vragen, filters en straffen klaarzetten.
+          Kies de perfecte sfeer voor jouw avond via de filters, straffen en
+          gamemodes en laat SPEL6 automatisch de juiste vragen en opdrachten
+          klaarzetten.
         </p>
       </div>
       <div
@@ -222,7 +228,9 @@
           >
             <span class="text-3xl">{{ vibe.emoji }}</span>
             <div>
-              <p class="text-xs font-semibold uppercase tracking-wide text-white/80">
+              <p
+                class="text-xs font-semibold uppercase tracking-wide text-white/80"
+              >
                 {{ vibe.subtitle }}
               </p>
               <h3 class="text-xl font-bold uppercase text-white">
@@ -276,6 +284,10 @@
                 </div>
               </li>
             </ul>
+            <p class="mt-6 text-sm text-yellow-300">
+              Tip: Spicy & 18+ kunnen heftig zijn. Er is altijd de mogelijkheid
+              om een vraag of opdracht over te slaan.
+            </p>
           </div>
           <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
             <div class="mb-6 flex items-center justify-between">
@@ -311,8 +323,7 @@
         </div>
         <p class="mt-10 text-center text-sm text-gray-400">
           Selecteer minstens één vraagtype en één straftype om het spel te
-          starten. De app houdt tijdens het spel bij welke straffen nog open
-          staan.
+          starten.
         </p>
       </div>
     </section>
@@ -392,8 +403,9 @@
             herinneringen die blijven.
           </p>
           <p class="text-lg text-gray-300">
-            Elke avond wordt een nieuw avontuur. Elke vraag brengt je dichter
-            bij elkaar. Dat is de magie van SPEL6.
+            Elke keer at je speelt is een nieuw avontuur. Elke vraag brengt je
+            dichter bij elkaar. De spanningen zullen stijgen. Dat is de magie
+            van SPEL6.
           </p>
         </div>
       </div>
@@ -490,7 +502,7 @@ const friendHighlights = [
 
 const mobilityHighlights = [
   "Beschikbaar op iOS en Android",
-  "Geen internet nodig om te spelen",
+  "Personaliseerbaar spel",
   "Regelmatige updates met nieuwe content",
 ];
 
@@ -513,7 +525,8 @@ const gameModes = [
   },
   {
     title: "SongBird",
-    description: "Herken het lied, soms vertaald of gehusseld.",
+    description:
+      "Herken het lied door twee zinnen, soms is het ook nog vertaald...",
     tagline: "Music Quiz",
     emoji: "🎤",
     surface:
@@ -529,7 +542,7 @@ const gameModes = [
   },
   {
     title: "Dilemma Duel",
-    description: "Kies een kant en verdedig je keuze. Niemand is veilig.",
+    description: "Kies een kant, de meerderheid wint deze opdracht.",
     tagline: "Discussie",
     emoji: "💬",
     surface:
@@ -537,7 +550,7 @@ const gameModes = [
   },
   {
     title: "Most Likely To",
-    description: "Wie o wie gaat het doen? Wijs aan en lach dubbel.",
+    description: "Wie o wie zou het doen? Wijs die persoon tegelijkertijd aan.",
     tagline: "Party Votes",
     emoji: "💥",
     surface:
@@ -547,7 +560,7 @@ const gameModes = [
 
 const whySpel6Points = [
   {
-    title: "Betaalbaarder dan kaartspellen",
+    title: "Betaalbaarder dan andere spellen",
     description:
       "Goedkoper dan fysieke spellen, minder ruimte, meer lol en meer opties.",
     icon: "💸",
@@ -627,22 +640,22 @@ const setupVibes = [
 const filterTypes = [
   {
     title: "18+",
-    description: "18+ onderwerpen of seksueel getinte vragen.",
+    description: "18+ onderwerpen of seksueel getinte opdrachten & vragen.",
     icon: "🔥",
   },
   {
     title: "Normaal",
-    description: "Mildere vragen en opdrachten voor een rustige mood.",
+    description: "Mildere vragen & opdrachten voor een rustige mood.",
     icon: "✅",
   },
   {
     title: "Spicy",
-    description: "Seksueel getinte vragen en opdrachten.",
+    description: "Seksueel getinte vragen & opdrachten.",
     icon: "🌶️",
   },
   {
     title: "Diepgaand",
-    description: "Emotionele of serieuzere vragen.",
+    description: "Emotionele of serieuzere vragen & opdrachten.",
     icon: "💬",
   },
   {
@@ -655,7 +668,7 @@ const filterTypes = [
 const penaltyTypes = [
   {
     title: "Drinken",
-    description: "Neem een slok. Werk ook zonder alcohol met mocktails.",
+    description: "Neem een (x) aantal slokken (alcohol)",
     icon: "🍻",
   },
   {
@@ -665,22 +678,23 @@ const penaltyTypes = [
   },
   {
     title: "Genant",
-    description: "Vertel een genant verhaal of geef iets toe.",
+    description: "Vertel een genant verhaal of beantwoord een genante vraag.",
     icon: "😳",
   },
   {
     title: "Dare",
-    description: "Voer een opdracht uit – van mild tot outrageous.",
+    description: "Voer een opdracht uit, van mild tot outrageous tot extreme.",
     icon: "🎯",
   },
   {
     title: "Acteren",
-    description: "Doe een mini performance of naspel een scène.",
+    description: "Doe een mini performance of speel een scène na.",
     icon: "🎭",
   },
   {
     title: "Persoonlijk",
-    description: "Beantwoord een vraag of geef iemand een compliment.",
+    description:
+      "Beantwoord een persoonlijke vraag of geef iemand een persoonlijk compliment.",
     icon: "💌",
   },
 ];
