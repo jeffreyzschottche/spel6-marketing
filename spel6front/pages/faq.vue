@@ -119,11 +119,15 @@ const rawFaqs: FaqCategory[] = [
     questions: [
       {
         q: "Wat is SPEL6?",
-        a: "SPEL6 is een interactief partyspel voor smartphones met duizenden vragen en challenges. Perfect voor feestjes, dates, en gezellige avonden met vrienden.",
+        a: "SPEL6 is een interactief partyspel voor smartphones met duizenden vragen en challenges. Perfect voor feestjes, dates, en gezellige avonden met vrienden of collega's.",
       },
       {
         q: "Hoeveel spelers heb ik nodig?",
-        a: "SPEL6 werkt het beste met 3-8 spelers, maar je kunt technisch gezien met zoveel mensen spelen als je wilt! Sommige modi werken ook met 2 spelers.",
+        a: "SPEL6 werkt het beste met minimaal 2 en maximaal 10 spelers.",
+      },
+      {
+        q: "Hoeveel kost SPEL6?",
+        a: "SPEL6 kost eenmalig € 2,99. Geen abonnementen en geen verborgen kosten.",
       },
       {
         q: "Zijn er abonnementen of verborgen kosten?",
@@ -182,19 +186,19 @@ const rawFaqs: FaqCategory[] = [
     questions: [
       {
         q: "Heb ik een account nodig?",
-        a: "Nee, je kunt SPEL6 gebruiken zonder account. Voor premium features en cloud opslag kun je optioneel een account aanmaken.",
+        a: "Nee, je hebt geen account nodig en er is op dit moment ook geen account-optie. Je speelt SPEL6 volledig zonder account.",
       },
       {
         q: "Hoe koop ik premium content?",
-        a: "In de app kun je premium pakketten kopen via de Shop sectie. Betaling verloopt veilig via de App Store of Google Play.",
+        a: "Aankopen verlopen niet via de app maar alleen via onze website. De app zelf bevat geen betalingen of in-app aankopen zodra je SPEL6 hebt aangeschaft.",
       },
       {
         q: "Kan ik een aankoop terugkrijgen?",
-        a: "Ja, binnen 14 dagen na aankoop kun je een refund aanvragen. Neem contact op via de support voor meer informatie.",
+        a: "Voor terugbetalingen van je aankoop moet je bij de App Store of Google Play Store zijn. Zij verwerken alle betalingen en eventuele refunds volgens hun eigen voorwaarden.",
       },
       {
-        q: "Op hoeveel apparaten kan ik premium content gebruiken?",
-        a: "Premium content is gekoppeld aan je account en kan op meerdere apparaten gebruikt worden (iOS of Android).",
+        q: "Op hoeveel apparaten kan ik SPEL6 gebruiken?",
+        a: "Je kunt SPEL6 downloaden op elk apparaat waarop je bent ingelogd met hetzelfde Apple ID of Google-account waarmee je de app hebt gekocht.",
       },
     ],
   },
@@ -207,7 +211,7 @@ const rawFaqs: FaqCategory[] = [
       },
       {
         q: "Is SPEL6 veilig voor minderjarigen?",
-        a: "SPEL6 is bedoeld voor 18+ en bevat expliciete inhoud. Ouders/verzorgers moeten zelf beoordelen of het geschikt is.",
+        a: "De basis van SPEL6 is kindvriendelijk en veel vragen en modi zijn geschikt voor jongere spelers. Sommige gamemodes, straftypes en filters zijn echter speciaal bedoeld voor 18+ en kunnen explicietere inhoud bevatten. Let goed op welke modus en filters je kiest en begeleid minderjarige spelers waar nodig.",
       },
       {
         q: "Worden mijn antwoorden opgeslagen?",
@@ -215,7 +219,7 @@ const rawFaqs: FaqCategory[] = [
       },
       {
         q: "Kan ik mijn data laten verwijderen?",
-        a: "Ja, je kunt altijd verzoeken om je data te laten verwijderen. Neem contact op via privacy@spel6.nl.",
+        a: "We slaan geen persoonlijk herleidbare gegevens of antwoorden op, dus er valt niets te verwijderen.",
       },
     ],
   },
