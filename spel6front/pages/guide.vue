@@ -33,6 +33,79 @@
 
       <section class="mb-16">
         <div class="mb-8 flex items-center gap-3">
+          <Filter class="h-7 w-7 text-[var(--vibe-yellow-light)]" />
+          <h2 class="text-white">Filters & Straftypes</h2>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2">
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-6">
+            <h3 class="mb-4 text-xl text-white">Vraagtypes</h3>
+            <div class="space-y-4">
+              <div
+                v-for="filter in guideFilters"
+                :key="filter.title"
+                class="flex items-start gap-3 rounded-2xl border border-white/5 bg-black/40 p-4"
+              >
+                <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-2xl">
+                  {{ filter.icon }}
+                </div>
+                <div>
+                  <p class="font-semibold text-white">{{ filter.title }}</p>
+                  <p class="text-sm text-gray-400">{{ filter.description }}</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-6">
+            <h3 class="mb-4 text-xl text-white">Straftypes</h3>
+            <div class="space-y-4">
+              <div
+                v-for="penalty in guidePenalties"
+                :key="penalty.title"
+                class="flex items-start gap-3 rounded-2xl border border-white/5 bg-black/40 p-4"
+              >
+                <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-2xl">
+                  {{ penalty.icon }}
+                </div>
+                <div>
+                  <p class="font-semibold text-white">{{ penalty.title }}</p>
+                  <p class="text-sm text-gray-400">{{ penalty.description }}</p>
+                </div>
+              </div>
+            </div>
+            <p class="mt-4 text-sm text-yellow-300">
+              Combineer gerust meerdere straffen. De app houdt bij wie wat nog
+              open heeft staan.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="mb-16">
+        <div class="mb-8 flex items-center gap-3">
+          <Medal class="h-7 w-7 text-[var(--vibe-green-light)]" />
+          <h2 class="text-white">Score & Eindstraf</h2>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+          <p class="mb-4 text-gray-300">
+            SPEL6 houdt automatisch de score bij. Goede antwoorden en geslaagde
+            opdrachten leveren punten op, strafmissers kosten punten.
+          </p>
+          <ul class="space-y-4">
+            <li v-for="item in scoreHighlights" :key="item.title" class="flex gap-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-lg">
+                {{ item.icon }}
+              </div>
+              <div>
+                <p class="font-semibold text-white">{{ item.title }}</p>
+                <p class="text-sm text-gray-400">{{ item.description }}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="mb-16">
+        <div class="mb-8 flex items-center gap-3">
           <Users class="h-7 w-7 text-[var(--vibe-blue-light)]" />
           <h2 class="text-white">Spelmodi uitgelegd</h2>
         </div>
@@ -120,13 +193,13 @@
 </template>
 
 <script setup lang="ts">
-import { BookOpen, Heart, Settings, Trophy, Users, Zap } from "lucide-vue-next";
+import { BookOpen, Filter, Heart, Medal, Settings, Trophy, Users, Zap } from "lucide-vue-next";
 
 const quickStart = [
   {
     step: "1",
     title: "Download en open de app",
-    description: "Download SPEL6 gratis via de App Store of Google Play. Open de app en kies je taal.",
+    description: "Download SPEL6 via de App Store of Google Play. Geen advertenties of abonnementen, dus je kunt direct spelen.",
     icon: "📱",
     color: "vibe-green-light",
   },
@@ -150,6 +223,55 @@ const quickStart = [
     description: "Druk op START en geef de telefoon door. Volg de instructies op het scherm en veel plezier!",
     icon: "🚀",
     color: "vibe-red-light",
+  },
+  {
+    step: "5",
+    title: "Kies vraagfilters",
+    description: "Selecteer welke vraagtypes jullie willen: van Normaal en Diepgaand tot 18+, Spicy of Random Straf voor onverwachte wendingen.",
+    icon: "🧭",
+    color: "vibe-blue-dark",
+  },
+  {
+    step: "6",
+    title: "Bepaal de straftypes",
+    description: "Geef aan of jullie willen drinken, extra vragen beantwoorden, gênante verhalen delen of opdrachten/dare-cards doen.",
+    icon: "⚡",
+    color: "vibe-red-dark",
+  },
+];
+
+const guideFilters = [
+  { title: "18+", description: "Kies alleen voor volwassen onderwerpen als iedereen zich daar goed bij voelt.", icon: "🔥" },
+  { title: "Normaal", description: "Lichte vragen om op te warmen of om met familie te spelen.", icon: "✅" },
+  { title: "Spicy", description: "Seksuele of pikante vragen en opdrachten voor durvers.", icon: "🌶️" },
+  { title: "Diepgaand", description: "Persoonlijke, serieuze of emotionele vragen.", icon: "💬" },
+  { title: "Random Straf", description: "De app deelt uit het niets straffen uit, zelfs wanneer je antwoord juist was.", icon: "🎲" },
+];
+
+const guidePenalties = [
+  { title: "Drinken", description: "Neem een slok (met of zonder alcohol) wanneer je de straf krijgt.", icon: "🍻" },
+  { title: "Vraag", description: "Je beantwoordt een extra vraag of iets persoonlijks.", icon: "❓" },
+  { title: "Genant", description: "Vertel iets gênants of herbeleef een cringy moment.", icon: "😳" },
+  { title: "Dare", description: "Doe de opdracht, hoe maf die ook is.", icon: "🎯" },
+  { title: "Acteren", description: "Speel een mini-scène of imiteer iemand.", icon: "🎭" },
+  { title: "Persoonlijk", description: "Geef complimenten of deel iets liefs over iemand anders.", icon: "💌" },
+];
+
+const scoreHighlights = [
+  {
+    title: "Live scoreboard",
+    description: "De app telt automatisch de punten op. Je ziet meteen wie aan kop gaat en wie achterloopt.",
+    icon: "📊",
+  },
+  {
+    title: "Laatste plek op de radar",
+    description: "Spelers met de laagste score riskeren een eindstraf. Zijn er meerdere laatste plaatsen, dan kiest de winnaar uit wie het moet ondergaan.",
+    icon: "🎯",
+  },
+  {
+    title: "Winnaar kiest eindstraf",
+    description: "Na de laatste ronde wijst de winnaar een straf toe én kiest hij/zij welke laagst scorende speler die moet uitvoeren.",
+    icon: "👑",
   },
 ];
 

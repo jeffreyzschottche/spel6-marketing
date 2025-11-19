@@ -3,11 +3,15 @@
     <AppNavbar />
     <main class="mx-auto max-w-4xl px-4 pt-32 pb-20 sm:px-6 lg:px-8">
       <header class="mb-16 text-center">
-        <div class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[var(--vibe-blue-light)]/20">
+        <div
+          class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[var(--vibe-blue-light)]/20"
+        >
           <HelpCircle class="h-10 w-10 text-[var(--vibe-blue-light)]" />
         </div>
         <h1 class="text-4xl font-semibold md:text-5xl">Veelgestelde vragen</h1>
-        <p class="mt-4 text-xl text-gray-300">Vind snel antwoord op je vragen over SPEL6.</p>
+        <p class="mt-4 text-xl text-gray-300">
+          Vind snel antwoord op je vragen over SPEL6.
+        </p>
       </header>
 
       <section class="space-y-12">
@@ -34,7 +38,9 @@
                 />
               </button>
               <div v-if="isOpen(question.id)" class="px-6 pb-4">
-                <div class="border-t border-white/10 pt-4 text-sm text-gray-300">
+                <div
+                  class="border-t border-white/10 pt-4 text-sm text-gray-300"
+                >
                   {{ question.a }}
                 </div>
               </div>
@@ -43,9 +49,13 @@
         </article>
       </section>
 
-      <section class="mt-16 rounded-2xl border border-white/10 bg-gradient-to-br from-[var(--vibe-blue-light)]/10 to-[var(--vibe-red-light)]/10 p-8 text-center">
+      <section
+        class="mt-16 rounded-2xl border border-white/10 bg-gradient-to-br from-[var(--vibe-blue-light)]/10 to-[var(--vibe-red-light)]/10 p-8 text-center"
+      >
         <h3 class="text-2xl font-semibold">Staat je vraag er niet tussen?</h3>
-        <p class="mt-4 text-sm text-gray-300">Neem contact met ons op en we helpen je graag verder!</p>
+        <p class="mt-4 text-sm text-gray-300">
+          Neem contact met ons op en we helpen je graag verder!
+        </p>
         <NuxtLink
           class="cta-animated mt-6 inline-flex items-center justify-center rounded-xl px-8 py-3 text-sm font-semibold text-white transition-transform duration-200 hover:scale-105"
           to="/contact"
@@ -59,20 +69,28 @@
           <div class="text-2xl">💡</div>
           <h3 class="mt-2 text-lg font-semibold">Tip</h3>
           <p class="mt-2 text-sm text-gray-400">
-            Check de Guide pagina voor uitgebreide instructies over hoe je SPEL6 speelt en het maximale eruit haalt!
+            Check de Guide pagina voor uitgebreide instructies over hoe je SPEL6
+            speelt en het maximale eruit haalt!
           </p>
-          <NuxtLink class="mt-4 inline-block text-sm text-[var(--vibe-green-light)] hover:underline" to="/guide">
-            Bekijk Guide →
+          <NuxtLink
+            class="cta-animated mt-4 inline-flex items-center justify-center rounded-xl px-6 py-2 text-sm font-semibold text-white transition-transform duration-200 hover:scale-105"
+            to="/guide"
+          >
+            Bekijk Guide
           </NuxtLink>
         </article>
         <article class="rounded-2xl border border-white/10 bg-white/5 p-6">
           <div class="text-2xl">🛡️</div>
           <h3 class="mt-2 text-lg font-semibold">Privacy</h3>
           <p class="mt-2 text-sm text-gray-400">
-            Benieuwd hoe we met je data omgaan? Lees ons Privacy Statement voor alle details over dataverzameling en beveiliging.
+            Lees de Privacy Statement voor alle details over dataverzameling en
+            beveiliging.
           </p>
-          <NuxtLink class="mt-4 inline-block text-sm text-[var(--vibe-blue-light)] hover:underline" to="/privacy">
-            Privacy Statement →
+          <NuxtLink
+            class="cta-animated mt-4 inline-flex items-center justify-center rounded-xl px-6 py-2 text-sm font-semibold text-white transition-transform duration-200 hover:scale-105"
+            to="/privacy"
+          >
+            Privacy Statement
           </NuxtLink>
         </article>
       </section>
@@ -108,8 +126,8 @@ const rawFaqs: FaqCategory[] = [
         a: "SPEL6 werkt het beste met 3-8 spelers, maar je kunt technisch gezien met zoveel mensen spelen als je wilt! Sommige modi werken ook met 2 spelers.",
       },
       {
-        q: "Is SPEL6 gratis?",
-        a: "Ja! SPEL6 is gratis te downloaden en bevat al honderden vragen. Voor nog meer content en speciale features kun je premium pakketten aanschaffen.",
+        q: "Zijn er abonnementen of verborgen kosten?",
+        a: "Nee. SPEL6 heeft geen advertenties en geen abonnement. Je betaalt één keer en krijgt toegang tot alle vragen en updates, inclusief nieuwe gamemodes.",
       },
       {
         q: "Op welke apparaten werkt SPEL6?",

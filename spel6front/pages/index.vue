@@ -3,13 +3,23 @@
     <AppNavbar />
 
     <!-- Hero -->
-    <section class="relative flex min-h-screen items-center justify-center overflow-hidden pt-24">
+    <section
+      class="relative flex min-h-screen items-center justify-center overflow-hidden pt-24"
+    >
       <div class="absolute inset-0">
-        <div class="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-[var(--vibe-blue-light)] blur-[120px] opacity-20" />
-        <div class="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-[var(--vibe-red-light)] blur-[120px] opacity-20" />
-        <div class="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--vibe-yellow-light)] blur-[150px] opacity-10" />
+        <div
+          class="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-[var(--vibe-blue-light)] blur-[120px] opacity-20"
+        />
+        <div
+          class="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-[var(--vibe-red-light)] blur-[120px] opacity-20"
+        />
+        <div
+          class="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--vibe-yellow-light)] blur-[150px] opacity-10"
+        />
       </div>
-      <div class="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
+      <div
+        class="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8"
+      >
         <div class="logo-pulse mx-auto mb-4 w-fit">
           <img
             :src="spel6Logo"
@@ -17,11 +27,14 @@
             class="mx-auto h-auto w-full max-w-[240px] sm:max-w-[300px] lg:max-w-[360px]"
           />
         </div>
-        <h1 class="mx-auto mb-6 max-w-4xl text-4xl font-semibold leading-tight text-white md:text-6xl">
+        <h1
+          class="mx-auto mb-6 max-w-4xl text-4xl font-semibold leading-tight text-white md:text-6xl"
+        >
           Het ultieme partyspel voor onvergetelijke momenten
         </h1>
         <p class="mx-auto mb-12 max-w-3xl text-xl text-gray-300">
-          Kies je sfeer, speel met je crew en maak van elke avond een feest. Duizenden vragen, eindeloos plezier.
+          Kies je sfeer, speel met je crew en maak van elke avond een feest.
+          Duizenden vragen, eindeloos plezier.
         </p>
         <div class="mb-8 flex flex-col justify-center gap-4 sm:flex-row">
           <a
@@ -30,7 +43,7 @@
             href="#"
             class="inline-flex items-center justify-center gap-3 rounded-2xl bg-white px-8 py-4 text-black transition-all hover:scale-105 hover:bg-gray-100"
           >
-            <component :is="store.icon" class="h-6 w-6" />
+            <img :src="store.iconSrc" :alt="store.label" class="h-6 w-auto" />
             <div class="text-left">
               <div class="text-xs">{{ store.subtext }}</div>
               <div class="text-base font-semibold">{{ store.label }}</div>
@@ -44,7 +57,9 @@
     <section class="px-4 py-20 sm:px-6 lg:px-8">
       <div class="mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-2">
         <div class="relative">
-          <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-[var(--vibe-green-light)] to-[var(--vibe-blue-light)] opacity-20 blur-xl" />
+          <div
+            class="absolute inset-0 rounded-3xl bg-gradient-to-r from-[var(--vibe-green-light)] to-[var(--vibe-blue-light)] opacity-20 blur-xl"
+          />
           <ImageWithFallback
             :src="featureSections[0].image"
             alt="Spelen met vrienden"
@@ -52,14 +67,23 @@
           />
         </div>
         <div>
-          <h2 class="mb-6 text-3xl font-semibold text-white">Spelen met je vrienden</h2>
+          <h2 class="mb-6 text-3xl font-semibold text-white">
+            Spelen met je vrienden
+          </h2>
           <p class="mb-6 text-lg text-gray-300">
-            SPEL6 brengt je dichter bij je vrienden dan ooit tevoren. Met duizenden vragen en uitdagingen leer je elkaar
-            op een compleet nieuwe manier kennen.
+            SPEL6 brengt je dichter bij je vrienden dan ooit tevoren. Met
+            duizenden vragen en uitdagingen leer je elkaar op een compleet
+            nieuwe manier kennen.
           </p>
           <ul class="space-y-4">
-            <li v-for="item in friendHighlights" :key="item" class="flex items-start gap-3 text-gray-300">
-              <span class="mt-1 rounded-full bg-[var(--vibe-green-light)]/20 p-1">
+            <li
+              v-for="item in friendHighlights"
+              :key="item"
+              class="flex items-start gap-3 text-gray-300"
+            >
+              <span
+                class="mt-1 rounded-full bg-[var(--vibe-green-light)]/20 p-1"
+              >
                 <Check class="h-4 w-4 text-[var(--vibe-green-light)]" />
               </span>
               <span>{{ item }}</span>
@@ -73,13 +97,23 @@
     <section class="px-4 py-20 sm:px-6 lg:px-8">
       <div class="mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-2">
         <div class="order-2 md:order-1">
-          <h2 class="mb-6 text-3xl font-semibold text-white">Altijd en overal</h2>
+          <h2 class="mb-6 text-3xl font-semibold text-white">
+            Altijd en overal
+          </h2>
           <p class="mb-6 text-lg text-gray-300">
-            Of je nu thuis bent, op stap of bij vrienden - SPEL6 gaat overal mee naartoe. Start een nieuw spel in seconden en duik direct in de actie.
+            Of je nu thuis bent, op stap of bij vrienden - SPEL6 gaat overal mee
+            naartoe. Start een nieuw spel in seconden en duik direct in de
+            actie.
           </p>
           <ul class="space-y-4">
-            <li v-for="item in mobilityHighlights" :key="item" class="flex items-start gap-3 text-gray-300">
-              <span class="mt-1 rounded-full bg-[var(--vibe-yellow-light)]/20 p-1">
+            <li
+              v-for="item in mobilityHighlights"
+              :key="item"
+              class="flex items-start gap-3 text-gray-300"
+            >
+              <span
+                class="mt-1 rounded-full bg-[var(--vibe-yellow-light)]/20 p-1"
+              >
                 <Check class="h-4 w-4 text-[var(--vibe-yellow-light)]" />
               </span>
               <span>{{ item }}</span>
@@ -87,7 +121,9 @@
           </ul>
         </div>
         <div class="order-1 relative md:order-2">
-          <div class="absolute inset-0 rounded-3xl bg-gradient-to-l from-[var(--vibe-yellow-light)] to-[var(--vibe-red-light)] opacity-20 blur-xl" />
+          <div
+            class="absolute inset-0 rounded-3xl bg-gradient-to-l from-[var(--vibe-yellow-light)] to-[var(--vibe-red-light)] opacity-20 blur-xl"
+          />
           <ImageWithFallback
             :src="featureSections[1].image"
             alt="Mobiele app"
@@ -97,71 +133,225 @@
       </div>
     </section>
 
-    <!-- Steps -->
+    <!-- Game Modes -->
     <section class="px-4 py-20 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-7xl text-center">
-        <h2 class="text-3xl font-semibold text-white">Zo werkt het</h2>
-        <p class="mt-4 text-xl text-gray-300">In 4 simpele stappen naar eindeloos plezier</p>
-        <div class="mt-16 grid gap-8 md:grid-cols-4">
-          <div v-for="step in steps" :key="step.step" class="text-center">
-            <div class="relative mx-auto mb-6 inline-block">
-              <div :class="`${step.color} absolute inset-0 rounded-full opacity-50 blur-xl`" />
-              <div :class="`${step.color} relative flex h-20 w-20 items-center justify-center rounded-full text-2xl font-semibold`">
-                {{ step.step }}
+      <div class="mx-auto max-w-6xl">
+        <div class="text-center">
+          <h2 class="text-3xl font-semibold text-white">Gamemodes</h2>
+          <p class="mt-4 text-xl text-gray-300">
+            Kies een deck dat past bij jullie avond – elk heeft zijn eigen
+            energie, regels en opdrachten.
+          </p>
+        </div>
+        <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <article
+            v-for="mode in gameModes"
+            :key="mode.title"
+            class="relative w-full cursor-pointer overflow-hidden rounded-3xl border-[6px] text-white shadow-xl transition-transform duration-200 hover:-translate-y-1"
+            :class="mode.surface"
+          >
+            <div class="relative z-10 flex min-h-[11rem] flex-col justify-between p-5">
+              <div class="mt-1 pr-8">
+                <p class="text-xs font-semibold uppercase tracking-wide text-white/70">
+                  {{ mode.tagline }}
+                </p>
+                <h3 class="mt-1 text-lg font-bold text-white">
+                  {{ mode.title }}
+                </h3>
+                <p class="text-sm text-white/80">
+                  {{ mode.description }}
+                </p>
               </div>
+              <div class="mt-4 text-5xl">{{ mode.emoji }}</div>
             </div>
-            <h3 class="mb-3 text-lg font-semibold text-white">{{ step.title }}</h3>
-            <p class="text-sm text-gray-400">{{ step.description }}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why SPEL6 -->
+    <section class="px-4 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-6xl">
+        <div class="mb-12 text-center">
+          <h2 class="text-3xl font-semibold text-white">Waarom SPEL6?</h2>
+          <p class="mt-4 text-xl text-gray-300">
+            Oneindig kaartspel, altijd in je broekzak
+          </p>
+        </div>
+        <div class="grid gap-8 md:grid-cols-3">
+          <div
+            v-for="point in whySpel6Points"
+            :key="point.title"
+            class="rounded-3xl border border-white/10 bg-white/5 p-6 text-center"
+          >
+            <div
+              :class="`mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl text-2xl ${point.accent}`"
+            >
+              {{ point.icon }}
+            </div>
+            <h3 class="mb-3 text-lg font-semibold text-white">
+              {{ point.title }}
+            </h3>
+            <p class="text-sm text-gray-400">{{ point.description }}</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Tabs -->
+    <!-- Vibes -->
     <section class="px-4 py-20 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-7xl">
-        <div class="mb-16 text-center">
-          <h2 class="text-3xl font-semibold text-white">Voor elk moment</h2>
-          <p class="mt-4 text-xl text-gray-300">Kies de perfecte sfeer voor jouw avond</p>
+      <div class="mx-auto max-w-5xl text-center">
+        <h2 class="text-3xl font-semibold text-white">Voor elk moment</h2>
+        <p class="mt-4 text-xl text-gray-300">
+          Kies de perfecte sfeer voor jouw avond en laat SPEL6 automatisch de
+          juiste vragen, filters en straffen klaarzetten.
+        </p>
+      </div>
+      <div
+        class="setup-wrapper mx-auto mt-12 flex max-w-4xl flex-col items-center rounded-3xl bg-black/60 px-4 py-10 text-white sm:px-8"
+      >
+        <div class="mt-8 w-full space-y-4">
+          <button
+            v-for="vibe in setupVibes"
+            :key="vibe.title"
+            class="relative flex w-full items-center gap-4 rounded-2xl p-4 text-left transition hover:shadow-2xl"
+            :style="{
+              backgroundColor: vibe.bgLight,
+            }"
+            type="button"
+          >
+            <span class="text-3xl">{{ vibe.emoji }}</span>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wide text-white/80">
+                {{ vibe.subtitle }}
+              </p>
+              <h3 class="text-xl font-bold uppercase text-white">
+                {{ vibe.title }}
+              </h3>
+              <p class="text-sm text-white/90">
+                {{ vibe.description }}
+              </p>
+            </div>
+          </button>
         </div>
-        <div class="grid items-center gap-12 lg:grid-cols-2">
-          <div class="space-y-4">
-            <button
-              v-for="(tab, index) in tabs"
-              :key="tab.title"
-              class="w-full rounded-2xl border-2 p-6 text-left transition"
-              :class="activeTab === index ? 'border-white/20 bg-white/10' : 'border-transparent bg-white/5 hover:bg-white/10'"
-              type="button"
-              @click="activeTab = index"
-            >
-              <h3 class="mb-2 text-xl font-semibold text-white">{{ tab.title }}</h3>
-              <p class="text-gray-400">{{ tab.description }}</p>
-            </button>
+      </div>
+    </section>
+
+    <!-- Filters & Penalties -->
+    <section class="px-4 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-6xl">
+        <div class="mb-12 text-center">
+          <h2 class="text-3xl font-semibold text-white">
+            Filters & Straftypes
+          </h2>
+          <p class="mt-4 text-xl text-gray-300">
+            Maak het spel volledig eigen: kies welke vraagtypes je wilt zien en
+            bepaal hoe pittig de straffen worden.
+          </p>
+        </div>
+        <div class="grid gap-8 md:grid-cols-2">
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+            <div class="mb-6 flex items-center justify-between">
+              <h3 class="text-2xl font-semibold text-white">Vraagtypes</h3>
+              <span class="text-xs uppercase tracking-wide text-gray-400"
+                >Minimaal één selecteren</span
+              >
+            </div>
+            <ul class="space-y-5">
+              <li
+                v-for="filter in filterTypes"
+                :key="filter.title"
+                class="flex items-start gap-4"
+              >
+                <span
+                  class="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-2xl"
+                >
+                  {{ filter.icon }}
+                </span>
+                <div>
+                  <p class="font-semibold text-white">{{ filter.title }}</p>
+                  <p class="text-sm text-gray-400">
+                    {{ filter.description }}
+                  </p>
+                </div>
+              </li>
+            </ul>
           </div>
-          <div class="relative">
-            <div class="animated-gradient absolute inset-0 rounded-3xl opacity-20 blur-2xl" />
-            <ImageWithFallback
-              :src="tabs[activeTab].image"
-              :alt="tabs[activeTab].title"
-              class="relative h-[500px] w-full rounded-3xl object-cover"
-            />
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+            <div class="mb-6 flex items-center justify-between">
+              <h3 class="text-2xl font-semibold text-white">Straftypes</h3>
+              <span class="text-xs uppercase tracking-wide text-gray-400"
+                >Combineer en wissel af</span
+              >
+            </div>
+            <ul class="space-y-5">
+              <li
+                v-for="penalty in penaltyTypes"
+                :key="penalty.title"
+                class="flex items-start gap-4"
+              >
+                <span
+                  class="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-2xl"
+                >
+                  {{ penalty.icon }}
+                </span>
+                <div>
+                  <p class="font-semibold text-white">{{ penalty.title }}</p>
+                  <p class="text-sm text-gray-400">
+                    {{ penalty.description }}
+                  </p>
+                </div>
+              </li>
+            </ul>
+            <p class="mt-6 text-sm text-yellow-300">
+              Tip: Speel met meerdere straftypes tegelijk voor maximale
+              spanning.
+            </p>
           </div>
         </div>
+        <p class="mt-10 text-center text-sm text-gray-400">
+          Selecteer minstens één vraagtype en één straftype om het spel te
+          starten. De app houdt tijdens het spel bij welke straffen nog open
+          staan.
+        </p>
       </div>
     </section>
 
     <!-- Promo -->
     <section class="relative my-20 px-4 py-32 sm:px-6 lg:px-8">
-      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--light-background)] to-transparent" />
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--light-background)] to-transparent"
+      />
       <div class="relative mx-auto max-w-5xl text-center">
         <div class="relative mx-auto mb-12 h-64 w-64">
-          <div class="animated-gradient absolute inset-0 rounded-full opacity-40 blur-2xl" />
-          <img :src="spel6Logo" alt="SPEL6 Promo" class="relative h-full w-full object-contain drop-shadow-2xl" />
+          <div
+            class="animated-gradient absolute inset-0 rounded-full opacity-40 blur-2xl"
+          />
+          <img
+            :src="spel6Logo"
+            alt="SPEL6 Promo"
+            class="relative h-full w-full object-contain drop-shadow-2xl"
+          />
         </div>
-        <h2 class="mb-6 text-3xl font-semibold text-white">Klaar voor het feest?</h2>
+        <h2 class="mb-6 text-3xl font-semibold text-white">
+          Klaar voor het feest?
+        </h2>
         <p class="mx-auto mb-8 max-w-3xl text-xl text-gray-300">
-          Sluit je aan bij duizenden spelers die SPEL6 al hebben ontdekt. Download nu en maak van elke avond een onvergetelijk avontuur.
+          Sluit je aan bij duizenden spelers die SPEL6 al hebben ontdekt. Geen
+          advertenties, geen abonnementen – alleen pure party vibes en continu
+          nieuwe content.
         </p>
+        <div class="mx-auto mb-8 grid max-w-4xl gap-4 sm:grid-cols-3">
+          <div
+            v-for="perk in promoHighlights"
+            :key="perk.title"
+            class="rounded-2xl border border-white/10 bg-white/5 p-4 text-center text-sm text-gray-300"
+          >
+            <div class="mb-2 text-2xl">{{ perk.icon }}</div>
+            <p class="font-semibold text-white">{{ perk.title }}</p>
+            <p class="text-xs text-gray-400">{{ perk.description }}</p>
+          </div>
+        </div>
         <div class="flex flex-col justify-center gap-4 sm:flex-row">
           <a
             v-for="store in stores"
@@ -169,8 +359,11 @@
             href="#"
             class="inline-flex items-center justify-center gap-3 rounded-2xl px-8 py-4 text-white transition-all hover:scale-105"
           >
-            <component :is="store.icon" class="h-6 w-6" />
-            <span>{{ store.cta }}</span>
+            <img :src="store.iconSrc" :alt="store.label" class="h-6 w-auto" />
+            <div class="text-left">
+              <div class="text-sm font-semibold">{{ store.label }}</div>
+              <div class="text-xs text-white/70">{{ store.cta }}</div>
+            </div>
           </a>
         </div>
       </div>
@@ -180,7 +373,9 @@
     <section class="px-4 py-20 sm:px-6 lg:px-8">
       <div class="mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-2">
         <div class="relative">
-          <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-[var(--vibe-red-light)] to-[var(--vibe-blue-light)] opacity-20 blur-xl" />
+          <div
+            class="absolute inset-0 rounded-3xl bg-gradient-to-r from-[var(--vibe-red-light)] to-[var(--vibe-blue-light)] opacity-20 blur-xl"
+          />
           <ImageWithFallback
             :src="featureSections[2].image"
             alt="Groep vrienden"
@@ -188,61 +383,74 @@
           />
         </div>
         <div>
-          <h2 class="mb-6 text-3xl font-semibold text-white">Herinneringen voor het leven</h2>
+          <h2 class="mb-6 text-3xl font-semibold text-white">
+            Herinneringen voor het leven
+          </h2>
           <p class="mb-6 text-lg text-gray-300">
-            SPEL6 draait niet alleen om vragen en challenges. Het gaat om de momenten die je creëert, de verhalen die je deelt en de herinneringen die blijven.
+            SPEL6 draait niet alleen om vragen en challenges. Het gaat om de
+            momenten die je creëert, de verhalen die je deelt en de
+            herinneringen die blijven.
           </p>
           <p class="text-lg text-gray-300">
-            Elke avond wordt een nieuw avontuur. Elke vraag brengt je dichter bij elkaar. Dat is de magie van SPEL6.
+            Elke avond wordt een nieuw avontuur. Elke vraag brengt je dichter
+            bij elkaar. Dat is de magie van SPEL6.
           </p>
         </div>
       </div>
     </section>
 
     <!-- Warnings -->
-    <section class="bg-white/5 px-4 py-20 sm:px-6 lg:px-8">
+    <section
+      class="relative overflow-hidden bg-white/5 px-4 py-20 sm:px-6 lg:px-8"
+    >
+      <img
+        :src="spel6GreyLogo"
+        alt=""
+        class="pointer-events-none absolute -right-10 top-1/2 hidden h-72 w-72 -translate-y-1/2 opacity-10 lg:block"
+        aria-hidden="true"
+      />
       <div class="mx-auto max-w-5xl text-center">
         <h2 class="text-3xl font-semibold text-white">Let op</h2>
         <p class="mt-4 text-lg text-gray-300">
-          SPEL6 is bedoeld voor volwassenen en kan inhoud bevatten die niet geschikt is voor alle leeftijden.
+          Sommige gamemodes van SPEL6 zijn bedoeld voor volwassenen en kan
+          inhoud bevatten die niet geschikt is voor alle leeftijden.
         </p>
         <div class="mt-12 flex flex-wrap items-center justify-center gap-8">
-          <div v-for="item in warnings" :key="item.label" class="flex flex-col items-center gap-2">
-            <div class="flex h-20 w-20 items-center justify-center rounded-full border-2 border-white/20 bg-white/10 text-2xl">
+          <div
+            v-for="item in warnings"
+            :key="item.label"
+            class="flex flex-col items-center gap-2"
+          >
+            <div
+              class="flex h-20 w-20 items-center justify-center rounded-full border-2 border-white/20 bg-white/10 text-2xl"
+            >
               {{ item.icon }}
             </div>
             <span class="text-sm text-gray-400">{{ item.label }}</span>
           </div>
         </div>
-        <p class="mt-8 text-sm text-gray-400">Speel verantwoord. Respecteer de grenzen van anderen.</p>
+        <p class="mt-8 text-sm text-gray-400">
+          Speel verantwoord. Respecteer de grenzen van anderen.
+        </p>
       </div>
     </section>
 
     <!-- Contact -->
     <section id="contact" class="px-4 py-20 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-4xl">
-        <div class="mb-12 text-center">
+        <div
+          class="rounded-2xl border border-white/10 bg-gradient-to-br from-[var(--vibe-blue-light)]/10 to-[var(--vibe-red-light)]/10 p-8 text-center"
+        >
           <h2 class="text-3xl font-semibold text-white">Contact</h2>
-          <p class="mt-4 text-xl text-gray-300">Heb je vragen of feedback? We horen graag van je!</p>
-        </div>
-        <div class="grid gap-8 md:grid-cols-3">
-          <div
-            v-for="card in contactCards"
-            :key="card.title"
-            class="rounded-2xl border border-white/10 bg-white/5 p-6 text-center"
+          <p class="mt-4 text-xl text-gray-300">
+            Heb je vragen of feedback? We horen graag van je!
+          </p>
+          <NuxtLink
+            to="/contact"
+            class="cta-animated mt-8 inline-flex items-center justify-center rounded-xl px-8 py-3 text-sm font-semibold text-white transition-transform duration-200 hover:scale-105"
           >
-            <div :class="`mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full ${card.accent}`">
-              <component :is="card.icon" :class="card.iconClass" />
-            </div>
-            <h3 class="mb-2 text-lg font-semibold text-white">{{ card.title }}</h3>
-            <component
-              :is="card.href ? 'a' : 'p'"
-              :href="card.href"
-              class="text-sm text-gray-400 transition hover:text-white"
-            >
-              {{ card.value }}
-            </component>
-          </div>
+            Neem contact op
+          </NuxtLink>
         </div>
       </div>
     </section>
@@ -252,14 +460,26 @@
 </template>
 
 <script setup lang="ts">
-import { Apple, Check, Mail, MapPin, Phone, Play } from "lucide-vue-next";
-import { ref } from "vue";
+import { Check } from "lucide-vue-next";
 
 const spel6Logo = useStorageAsset("storage/spel6logo.png");
+const appStoreBadge = useStorageAsset("storage/appstore.png");
+const playStoreBadge = useStorageAsset("storage/playstore.png");
+const spel6GreyLogo = useStorageAsset("storage/spel6-grey.png");
 
 const stores = [
-  { icon: Apple, label: "App Store", subtext: "Download op de", cta: "Download nu - Gratis" },
-  { icon: Play, label: "Google Play", subtext: "Verkrijg het op", cta: "Download nu - Gratis" },
+  {
+    iconSrc: appStoreBadge,
+    label: "App Store",
+    subtext: "Download in de",
+    cta: "Geen advertenties • Geen abonnement",
+  },
+  {
+    iconSrc: playStoreBadge,
+    label: "Google Play",
+    subtext: "Download in de",
+    cta: "Geen advertenties • Geen abonnement",
+  },
 ];
 
 const friendHighlights = [
@@ -274,40 +494,207 @@ const mobilityHighlights = [
   "Regelmatige updates met nieuwe content",
 ];
 
-const steps = [
-  { step: "1", title: "Download de app", description: "Gratis beschikbaar in de stores", color: "vibe-green-light" },
-  { step: "2", title: "Kies je sfeer", description: "Feest, vrienden, collega's of een date", color: "vibe-yellow-light" },
-  { step: "3", title: "Verzamel je crew", description: "Roep je vrienden bij elkaar", color: "vibe-blue-light" },
-  { step: "4", title: "Let's go!", description: "Beantwoord vragen en doe challenges", color: "vibe-red-light" },
+const gameModes = [
+  {
+    title: "Do You Know Me?",
+    description: "Persoonlijke vragen over je vrienden",
+    tagline: "Persoonlijk",
+    emoji: "🎭",
+    surface:
+      "bg-purple-700 border-purple-900/70 shadow-[0_0_24px_rgba(123,76,204,0.45)]",
+  },
+  {
+    title: "Chaos Crew",
+    description: "Iedereen doet mee. Opdrachten, actie, pure chaos!",
+    tagline: "Party Challenges",
+    emoji: "👊",
+    surface:
+      "bg-pink-700 border-pink-900/70 shadow-[0_0_24px_rgba(225,64,146,0.45)]",
+  },
+  {
+    title: "SongBird",
+    description: "Herken het lied, soms vertaald of gehusseld.",
+    tagline: "Music Quiz",
+    emoji: "🎤",
+    surface:
+      "bg-amber-600 border-amber-800/70 shadow-[0_0_24px_rgba(255,175,64,0.4)]",
+  },
+  {
+    title: "Quizmaster",
+    description: "Pubquiz-vibes met verrassende thema's.",
+    tagline: "Trivia",
+    emoji: "🤔",
+    surface:
+      "bg-cyan-800 border-cyan-900/70 shadow-[0_0_24px_rgba(56,189,248,0.35)]",
+  },
+  {
+    title: "Dilemma Duel",
+    description: "Kies een kant en verdedig je keuze. Niemand is veilig.",
+    tagline: "Discussie",
+    emoji: "💬",
+    surface:
+      "bg-red-700 border-red-900/70 shadow-[0_0_24px_rgba(220,38,38,0.45)]",
+  },
+  {
+    title: "Most Likely To",
+    description: "Wie o wie gaat het doen? Wijs aan en lach dubbel.",
+    tagline: "Party Votes",
+    emoji: "💥",
+    surface:
+      "bg-green-800 border-green-900/70 shadow-[0_0_24px_rgba(34,197,94,0.4)]",
+  },
 ];
 
-const tabs = [
+const whySpel6Points = [
+  {
+    title: "Betaalbaarder dan kaartspellen",
+    description:
+      "Goedkoper dan fysieke spellen, minder ruimte, meer lol en meer opties.",
+    icon: "💸",
+    accent: "bg-[var(--vibe-green-light)]/15 text-[var(--vibe-green-light)]",
+  },
+  {
+    title: "Altijd up-to-date",
+    description:
+      "Nieuwe vragen, opdrachten, gamemodes en functies blijven komen dankzij regelmatige updates.",
+    icon: "🌀",
+    accent: "bg-[var(--vibe-blue-light)]/15 text-[var(--vibe-blue-light)]",
+  },
+  {
+    title: "Filters voor elke mood",
+    description:
+      "Elke gamemode heeft eigen filters en toon. Geen generieke vragen, maar precies wat past bij het moment.",
+    icon: "🔍",
+    accent: "bg-[var(--vibe-yellow-light)]/15 text-[var(--vibe-yellow-light)]",
+  },
+];
+
+const promoHighlights = [
+  {
+    title: "Betaalbare keuze",
+    description: "Goedkoper dan stapels fysieke kaartspellen.",
+    icon: "💸",
+  },
+  {
+    title: "Altijd nieuw",
+    description: "Updates brengen verse vragen en gamemodes.",
+    icon: "♻️",
+  },
+  {
+    title: "Slimme content",
+    description: "Vragen en opdrachten passen perfect bij elke sfeer.",
+    icon: "✨",
+  },
+];
+
+const finalFeatureImage = useStorageAsset("storage/img5.png");
+const mobilityImage = useStorageAsset("storage/img6.png");
+const friendsFeatureImage = useStorageAsset("storage/img7.png");
+
+const setupVibes = [
   {
     title: "Feest",
-    description: "Een wereld vol fun en chaos, perfect voor feestjes!",
-    image: "https://images.unsplash.com/photo-1546512636-028082dff74d?auto=format&fit=crop&w=1080&q=80",
+    subtitle: "Party Mode",
+    description: "Een avond vol lol en om steeds minder te herinneren.",
+    emoji: "🍸",
+    bgLight: "var(--vibe-yellow-light)",
   },
   {
     title: "Vrienden",
-    description: "Ook al kennen jullie elkaar goed, ontmoet elkaar nu pas echt!",
-    image: "https://images.unsplash.com/photo-1688413235039-c6a2f715787e?auto=format&fit=crop&w=1080&q=80",
+    subtitle: "Friends Deep Dive",
+    description:
+      "Ook al kennen jullie elkaar goed. Onthoud: niemand is veilig.",
+    emoji: "🤝",
+    bgLight: "var(--vibe-green-light)",
   },
   {
     title: "Collega's",
-    description: "Nu werken jullie samen, straks spelen jullie samen!",
-    image: "https://images.unsplash.com/photo-1528870884180-5649b20f6435?auto=format&fit=crop&w=1080&q=80",
+    subtitle: "Work Mode",
+    description: "Na werktijd alsnog met ze opgescheept...",
+    emoji: "👔",
+    bgLight: "var(--vibe-blue-light)",
   },
   {
-    title: "Dates",
-    description: "Spannende en originele vragen - het perfecte ijsbreker!",
-    image: "https://images.unsplash.com/photo-1652962431991-42397e5e44a7?auto=format&fit=crop&w=1080&q=80",
+    title: "Date",
+    subtitle: "Date Night",
+    description:
+      "Een avond zonder ongemakkelijke stiltes en vol spanning en gebroken ijs.",
+    emoji: "❤️",
+    bgLight: "var(--vibe-red-light)",
+  },
+];
+
+const filterTypes = [
+  {
+    title: "18+",
+    description: "18+ onderwerpen of seksueel getinte vragen.",
+    icon: "🔥",
+  },
+  {
+    title: "Normaal",
+    description: "Mildere vragen en opdrachten voor een rustige mood.",
+    icon: "✅",
+  },
+  {
+    title: "Spicy",
+    description: "Seksueel getinte vragen en opdrachten.",
+    icon: "🌶️",
+  },
+  {
+    title: "Diepgaand",
+    description: "Emotionele of serieuzere vragen.",
+    icon: "💬",
+  },
+  {
+    title: "Random Straf",
+    description: "Soms krijg je plots een straf zonder duidelijke reden.",
+    icon: "🎲",
+  },
+];
+
+const penaltyTypes = [
+  {
+    title: "Drinken",
+    description: "Neem een slok. Werk ook zonder alcohol met mocktails.",
+    icon: "🍻",
+  },
+  {
+    title: "Vraag",
+    description: "Krijg een extra persoonlijke of ongemakkelijke vraag.",
+    icon: "❓",
+  },
+  {
+    title: "Genant",
+    description: "Vertel een genant verhaal of geef iets toe.",
+    icon: "😳",
+  },
+  {
+    title: "Dare",
+    description: "Voer een opdracht uit – van mild tot outrageous.",
+    icon: "🎯",
+  },
+  {
+    title: "Acteren",
+    description: "Doe een mini performance of naspel een scène.",
+    icon: "🎭",
+  },
+  {
+    title: "Persoonlijk",
+    description: "Beantwoord een vraag of geef iemand een compliment.",
+    icon: "💌",
   },
 ];
 
 const featureSections = [
-  { image: "https://images.unsplash.com/photo-1546512636-028082dff74d?auto=format&fit=crop&w=1080&q=80" },
-  { image: "https://images.unsplash.com/photo-1528870884180-5649b20f6435?auto=format&fit=crop&w=1080&q=80" },
-  { image: "https://images.unsplash.com/photo-1688413235039-c6a2f715787e?auto=format&fit=crop&w=1080&q=80" },
+  {
+    image: friendsFeatureImage,
+  },
+  {
+    image: mobilityImage,
+  },
+  {
+    image: finalFeatureImage,
+  },
 ];
 
 const warnings = [
@@ -317,32 +704,4 @@ const warnings = [
   { label: "Expliciete inhoud", icon: "💋" },
   { label: "Kijkwijzer", icon: "👁️" },
 ];
-
-const contactCards = [
-  {
-    title: "Email",
-    value: "info@spel6.nl",
-    href: "mailto:info@spel6.nl",
-    icon: Mail,
-    iconClass: "h-5 w-5 text-[var(--vibe-blue-light)]",
-    accent: "bg-[var(--vibe-blue-light)]/20",
-  },
-  {
-    title: "Telefoon",
-    value: "+31 6 12 34 56 78",
-    href: "tel:+31612345678",
-    icon: Phone,
-    iconClass: "h-5 w-5 text-[var(--vibe-green-light)]",
-    accent: "bg-[var(--vibe-green-light)]/20",
-  },
-  {
-    title: "Locatie",
-    value: "Amsterdam, Nederland",
-    icon: MapPin,
-    iconClass: "h-5 w-5 text-[var(--vibe-yellow-light)]",
-    accent: "bg-[var(--vibe-yellow-light)]/20",
-  },
-];
-
-const activeTab = ref(0);
 </script>
