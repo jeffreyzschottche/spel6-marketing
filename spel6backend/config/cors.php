@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:3000', 'localhost:3000', '127.0.0.1', 'localhost'],
+    'allowed_origins' => ['http://localhost:3000', 'localhost:3000', '127.0.0.1', 'localhost', 'https://spel6.nl'],
 
     'allowed_origins_patterns' => [],
 
