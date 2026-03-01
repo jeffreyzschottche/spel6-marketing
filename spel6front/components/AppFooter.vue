@@ -19,6 +19,8 @@
               v-for="store in footerStores"
               :key="store.label"
               :href="store.href"
+              target="_blank"
+              rel="noopener noreferrer"
               class="inline-flex items-center gap-2 rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-black transition hover:scale-105 hover:bg-gray-100"
             >
               <img :src="store.iconSrc" :alt="store.label" class="h-5 w-auto" />
@@ -156,8 +158,16 @@ const socialLinks = [
 ];
 
 const footerStores = [
-  { label: "App Store", iconSrc: appStoreBadge, href: "#" },
-  { label: "Play Store", iconSrc: playStoreBadge, href: "#" },
+  {
+    label: "App Store",
+    iconSrc: appStoreBadge,
+    href: "https://apps.apple.com/us/app/spel-6/id6755892478",
+  },
+  {
+    label: "Play Store",
+    iconSrc: playStoreBadge,
+    href: "https://play.google.com/store/apps/details?id=com.spel.zes",
+  },
 ];
 
 const currentYear = new Date().getFullYear();

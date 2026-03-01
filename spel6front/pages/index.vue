@@ -40,7 +40,9 @@
           <a
             v-for="store in stores"
             :key="store.label"
-            href="#"
+             :href="store.href"
+            target="_blank"
+            rel="noopener noreferrer"
             class="inline-flex items-center justify-center gap-3 rounded-2xl bg-white px-8 py-4 text-black transition-all hover:scale-105 hover:bg-gray-100"
           >
             <img :src="store.iconSrc" :alt="store.label" class="h-6 w-auto" />
@@ -367,7 +369,9 @@
           <a
             v-for="store in stores"
             :key="`promo-${store.label}`"
-            href="#"
+             :href="store.href"
+            target="_blank"
+            rel="noopener noreferrer"
             class="inline-flex items-center justify-center gap-3 rounded-2xl px-8 py-4 text-white transition-all hover:scale-105"
           >
             <img :src="store.iconSrc" :alt="store.label" class="h-6 w-auto" />
@@ -485,12 +489,14 @@ const stores = [
     label: "App Store",
     subtext: "Download in de",
     cta: "Geen advertenties • Geen abonnement",
+    href: "https://apps.apple.com/us/app/spel-6/id6755892478",
   },
   {
     iconSrc: playStoreBadge,
     label: "Google Play",
     subtext: "Download in de",
     cta: "Geen advertenties • Geen abonnement",
+    href: "https://play.google.com/store/apps/details?id=com.spel.zes",
   },
 ];
 
