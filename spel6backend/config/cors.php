@@ -19,7 +19,8 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:3000', 'localhost:3000', '127.0.0.1', 'localhost', 'https://spel6.nl'],
+    // The Capacitor app runs from capacitor://localhost (iOS) and https://localhost (Android).
+    'allowed_origins' => ['http://localhost:3000', 'localhost:3000', '127.0.0.1', 'localhost', 'https://spel6.nl', 'capacitor://localhost', 'https://localhost', 'http://localhost'],
 
     'allowed_origins_patterns' => [],
 

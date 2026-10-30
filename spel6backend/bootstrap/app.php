@@ -12,7 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'spel6.cms' => \App\Http\Middleware\AuthenticateCmsToken::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
