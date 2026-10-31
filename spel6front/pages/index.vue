@@ -1,727 +1,437 @@
 <template>
-  <div class="min-h-screen bg-[#0a0a0a] text-white">
+  <div ref="root" class="page">
     <AppNavbar />
 
-    <!-- Hero -->
-    <section
-      class="relative flex min-h-screen items-center justify-center overflow-hidden pt-24"
-    >
-      <div class="absolute inset-0">
-        <div
-          class="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-[var(--vibe-blue-light)] blur-[120px] opacity-20"
-        />
-        <div
-          class="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-[var(--vibe-red-light)] blur-[120px] opacity-20"
-        />
-        <div
-          class="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--vibe-yellow-light)] blur-[150px] opacity-10"
-        />
-      </div>
-      <div
-        class="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8"
-      >
-        <div class="logo-pulse mx-auto mb-4 w-fit">
-          <img
-            :src="spel6Logo"
-            alt="SPEL6"
-            class="mx-auto h-auto w-full max-w-[240px] sm:max-w-[300px] lg:max-w-[360px]"
-          />
+    <main>
+      <!-- Hero -->
+      <section class="hero grain" aria-labelledby="hero-title">
+        <div class="hero-photos" aria-hidden="true">
+          <img src="/images/friends.webp" alt="" class="hero-photo hp-1" />
+          <img src="/images/party-v2.webp" alt="" class="hero-photo hp-2" />
+          <img src="/images/whisper-v2.webp" alt="" class="hero-photo hp-3" />
+          <img src="/images/hands-v2.webp" alt="" class="hero-photo hp-4" />
+          <div class="hero-glow"></div>
         </div>
-        <h1
-          class="mx-auto mb-6 max-w-4xl text-4xl font-semibold leading-tight text-white md:text-6xl"
-        >
-          Het ultieme partyspel voor onvergetelijke momenten
-        </h1>
-        <p class="mx-auto mb-12 max-w-3xl text-xl text-gray-300">
-          Kies je sfeer en gamemodes, speel met je crew en maak van elke avond
-          een feest. Duizenden vragen, duizenden opdrachten eindeloos plezier.
-        </p>
-        <div class="mb-8 flex flex-col justify-center gap-4 sm:flex-row">
-          <a
-            v-for="store in stores"
-            :key="store.label"
-             :href="store.href"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center gap-3 rounded-2xl bg-white px-8 py-4 text-black transition-all hover:scale-105 hover:bg-gray-100"
-          >
-            <img :src="store.iconSrc" :alt="store.label" class="h-6 w-auto" />
-            <div class="text-left">
-              <div class="text-xs">{{ store.subtext }}</div>
-              <div class="text-base font-semibold">{{ store.label }}</div>
-            </div>
-          </a>
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow">Het partyspel voor aan tafel</p>
+            <h1 id="hero-title">Leer elkaar <em>écht</em> kennen.</h1>
+            <p class="lede">Spel6 is het kaartspel op je telefoon voor vrienden, dates, feestjes en collega's. Kies jullie vibe, maak je eigen mix en speel. Wie verliest, krijgt een opdracht.</p>
+            <StoreButtons />
+            <p class="hero-note">Geen advertenties · Geen abonnement · Nederlands, Engels, Duits en Spaans</p>
+          </div>
+          <div class="hero-phone">
+            <PhoneDemo :clips="reel" eager @change="reelIndex = $event" />
+            <ol class="reel-steps" aria-label="Demo van de app">
+              <li v-for="(clip, i) in reel" :key="clip.src" :class="{ active: i === reelIndex, done: i < reelIndex }"><span class="sr-only">{{ clip.label }}</span></li>
+            </ol>
+            <p class="reel-label" aria-live="polite">{{ reel[reelIndex]?.label }}</p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Feature 1 -->
-    <section class="px-4 py-20 sm:px-6 lg:px-8">
-      <div class="mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-2">
-        <div class="relative">
-          <div
-            class="absolute inset-0 rounded-3xl bg-gradient-to-r from-[var(--vibe-green-light)] to-[var(--vibe-blue-light)] opacity-20 blur-xl"
-          />
-          <ImageWithFallback
-            :src="featureSections[0].image"
-            alt="Spelen met vrienden"
-            class="relative h-[400px] w-full rounded-3xl object-cover"
-          />
+      <!-- Numbers -->
+      <section class="stats" aria-label="Spel6 in cijfers">
+        <div v-for="stat in stats" :key="stat.label" class="stat">
+          <strong class="stat-value" :data-value="stat.value">{{ stat.display }}</strong>
+          <span>{{ stat.label }}</span>
         </div>
-        <div>
-          <h2 class="mb-6 text-3xl font-semibold text-white">
-            Partyspel voor met je vrienden
-          </h2>
-          <p class="mb-6 text-lg text-gray-300">
-            SPEL6 brengt je dichter bij je vrienden dan ooit tevoren. Met
-            duizenden vragen en opdrachten leer je elkaar op een compleet nieuwe
-            manier kennen terwijl je super veel lol hebt.
-          </p>
-          <ul class="space-y-4">
-            <li
-              v-for="item in friendHighlights"
-              :key="item"
-              class="flex items-start gap-3 text-gray-300"
-            >
-              <span
-                class="mt-1 rounded-full bg-[var(--vibe-green-light)]/20 p-1"
-              >
-                <Check class="h-4 w-4 text-[var(--vibe-green-light)]" />
-              </span>
-              <span>{{ item }}</span>
+      </section>
+
+      <!-- How it works -->
+      <section id="zo-werkt-het" class="section how" aria-labelledby="how-title">
+        <header class="section-head">
+          <p class="eyebrow">Zo werkt het</p>
+          <h2 id="how-title">In vier tikken aan tafel.</h2>
+          <p class="section-lede">Je stelt de avond samen, Spel6 zoekt de vragen en opdrachten die erbij passen.</p>
+        </header>
+        <div class="how-grid">
+          <ol class="how-steps">
+            <li v-for="(step, i) in steps" :key="step.title" class="how-step" :class="{ active: i === stepIndex }" :data-step="i">
+              <span class="how-num">0{{ i + 1 }}</span>
+              <h3>{{ step.title }}</h3>
+              <p>{{ step.text }}</p>
+              <ul><li v-for="point in step.points" :key="point">{{ point }}</li></ul>
+              <div class="how-inline-phone"><PhoneDemo :clips="[step.clip]" small /></div>
             </li>
-          </ul>
+          </ol>
+          <div class="how-sticky" aria-hidden="true">
+            <PhoneDemo :clips="steps.map((s) => s.clip)" :active="stepIndex" />
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Feature 2 -->
-    <section class="px-4 py-20 sm:px-6 lg:px-8">
-      <div class="mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-2">
-        <div class="order-2 md:order-1">
-          <h2 class="mb-6 text-3xl font-semibold text-white">
-            Altijd en overal
-          </h2>
-          <p class="mb-6 text-lg text-gray-300">
-            Of je nu op een date bent, op een feestje, werk of bij vrienden,
-            SPEL6 gaat overal mee naartoe. Het is beschikbaar in het Nederlands,
-            Duits en Engels. Met verschillende game modes, vibes en filters
-            creer je het perfecte spel voor het juiste moment.
-          </p>
-          <ul class="space-y-4">
-            <li
-              v-for="item in mobilityHighlights"
-              :key="item"
-              class="flex items-start gap-3 text-gray-300"
-            >
-              <span
-                class="mt-1 rounded-full bg-[var(--vibe-yellow-light)]/20 p-1"
-              >
-                <Check class="h-4 w-4 text-[var(--vibe-yellow-light)]" />
-              </span>
-              <span>{{ item }}</span>
-            </li>
-          </ul>
-        </div>
-        <div class="order-1 relative md:order-2">
-          <div
-            class="absolute inset-0 rounded-3xl bg-gradient-to-l from-[var(--vibe-yellow-light)] to-[var(--vibe-red-light)] opacity-20 blur-xl"
-          />
-          <ImageWithFallback
-            :src="featureSections[1].image"
-            alt="Mobiele app"
-            class="relative h-[400px] w-full rounded-3xl object-cover"
-          />
-        </div>
-      </div>
-    </section>
-
-    <!-- Game Modes -->
-    <section class="px-4 py-20 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-6xl">
-        <div class="text-center">
-          <h2 class="text-3xl font-semibold text-white">Gamemodes</h2>
-          <p class="mt-4 text-xl text-gray-300">
-            Kies een deck dat past bij jullie avond – elk heeft zijn eigen
-            energie, regels en opdrachten.
-          </p>
-        </div>
-        <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <article
-            v-for="mode in gameModes"
-            :key="mode.title"
-            class="relative w-full cursor-pointer overflow-hidden rounded-3xl border-[6px] text-white shadow-xl transition-transform duration-200 hover:-translate-y-1"
-            :class="mode.surface"
-          >
-            <div
-              class="relative z-10 flex min-h-[11rem] flex-col justify-between p-5"
-            >
-              <div class="mt-1 pr-8">
-                <p
-                  class="text-xs font-semibold uppercase tracking-wide text-white/70"
-                >
-                  {{ mode.tagline }}
-                </p>
-                <h3 class="mt-1 text-lg font-bold text-white">
-                  {{ mode.title }}
-                </h3>
-                <p class="text-sm text-white/80">
-                  {{ mode.description }}
-                </p>
-              </div>
-              <div class="mt-4 text-5xl">{{ mode.emoji }}</div>
-            </div>
+      <!-- Game modes -->
+      <section id="spelvormen" class="section" aria-labelledby="modes-title">
+        <header class="section-head">
+          <p class="eyebrow">Zes spelvormen</p>
+          <h2 id="modes-title">Elke ronde een ander spel.</h2>
+          <p class="section-lede">Kies er één of maak een mix. Spel6 wisselt ze af, zodat het nooit hetzelfde voelt.</p>
+        </header>
+        <div class="modes">
+          <article v-for="m in gameModes" :key="m.code" class="mode reveal-up" :style="{ '--accent': m.accent }">
+            <div class="mode-art" aria-hidden="true"><GameModeArtwork :code="m.code" /></div>
+            <h3>{{ m.title }}</h3>
+            <p class="mode-tag">{{ m.tag }}</p>
+            <p>{{ m.text }}</p>
+            <p class="mode-example">{{ m.example }}</p>
           </article>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Why SPEL6 -->
-    <section class="px-4 py-20 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-6xl">
-        <div class="mb-12 text-center">
-          <h2 class="text-3xl font-semibold text-white">Waarom SPEL6?</h2>
-          <p class="mt-4 text-xl text-gray-300">
-            Oneindig kaartspel, altijd in je broekzak
-          </p>
+      <!-- Try a card -->
+      <section id="probeer" class="section try grain" aria-labelledby="try-title">
+        <header class="section-head">
+          <p class="eyebrow">Probeer het zelf</p>
+          <h2 id="try-title">Trek een kaart.</h2>
+          <p class="section-lede">Echte kaarten uit de app. Kies een spelvorm en speel er één na.</p>
+        </header>
+        <CardDemo />
+      </section>
+
+      <!-- In the game -->
+      <section class="section" aria-labelledby="game-title">
+        <header class="section-head">
+          <p class="eyebrow">Midden in het spel</p>
+          <h2 id="game-title">Lezen, raden, kiezen. En soms een opdracht.</h2>
+        </header>
+        <div class="trio">
+          <figure v-for="item in inGame" :key="item.clip.src" class="trio-item reveal-up">
+            <PhoneDemo :clips="[item.clip]" small />
+            <figcaption><strong>{{ item.title }}</strong>{{ item.text }}</figcaption>
+          </figure>
         </div>
-        <div class="grid gap-8 md:grid-cols-3">
-          <div
-            v-for="point in whySpel6Points"
-            :key="point.title"
-            class="rounded-3xl border border-white/10 bg-white/5 p-6 text-center"
-          >
-            <div
-              :class="`mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl text-2xl ${point.accent}`"
-            >
-              {{ point.icon }}
-            </div>
-            <h3 class="mb-3 text-lg font-semibold text-white">
-              {{ point.title }}
-            </h3>
-            <p class="text-sm text-gray-400">{{ point.description }}</p>
+      </section>
+
+      <!-- Vibes and limits -->
+      <section class="section" aria-labelledby="vibes-title">
+        <header class="section-head">
+          <p class="eyebrow">Voor elke avond</p>
+          <h2 id="vibes-title">Jullie gezelschap. Jullie regels.</h2>
+          <p class="section-lede">De vibe bepaalt welke vragen langskomen. Met filters en voorkeuren houden jullie het zo licht of zo persoonlijk als je wilt.</p>
+        </header>
+        <div class="vibes">
+          <article v-for="vibe in vibes" :key="vibe.title" class="vibe reveal-up">
+            <img :src="vibe.image" :alt="vibe.alt" loading="lazy" />
+            <div class="vibe-copy"><h3>{{ vibe.title }}</h3><p>{{ vibe.text }}</p></div>
+          </article>
+        </div>
+        <div class="limits">
+          <div class="limit reveal-up">
+            <h3>Filters</h3>
+            <div class="chips"><span v-for="f in filters" :key="f.name" class="chip" :class="f.kind">{{ f.name }}</span></div>
+            <p>Spicy en 18+ staan alleen aan als iedereen eerst akkoord geeft. Romantiek en zoenen zitten bij 18+, seksuele vragen alleen bij Spicy.</p>
+          </div>
+          <div class="limit reveal-up">
+            <h3>Voorkeuren per speler</h3>
+            <div class="chips"><span class="chip">Alcohol</span><span class="chip">Fysieke opdrachten</span></div>
+            <p>Drinkt iemand niet of wil iemand niet bewegen? Zet het uit bij die speler. Die krijgt dan geen drinkopdrachten of fysieke uitdagingen.</p>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Vibes -->
-    <section class="px-4 py-20 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-5xl text-center">
-        <h2 class="text-3xl font-semibold text-white">Voor elk moment</h2>
-        <p class="mt-4 text-xl text-gray-300">
-          Kies de perfecte sfeer voor jouw avond via de filters, straffen en
-          gamemodes en laat SPEL6 automatisch de juiste vragen en opdrachten
-          klaarzetten.
-        </p>
-      </div>
-      <div
-        class="setup-wrapper mx-auto mt-12 flex max-w-4xl flex-col items-center rounded-3xl bg-black/60 px-4 py-10 text-white sm:px-8"
-      >
-        <div class="mt-8 w-full space-y-4">
-          <button
-            v-for="vibe in setupVibes"
-            :key="vibe.title"
-            class="relative flex w-full items-center gap-4 rounded-2xl p-4 text-left transition hover:shadow-2xl"
-            :style="{
-              backgroundColor: vibe.bgLight,
-            }"
-            type="button"
-          >
-            <span class="text-3xl">{{ vibe.emoji }}</span>
-            <div>
-              <p
-                class="text-xs font-semibold uppercase tracking-wide text-white/80"
-              >
-                {{ vibe.subtitle }}
-              </p>
-              <h3 class="text-xl font-bold uppercase text-white">
-                {{ vibe.title }}
-              </h3>
-              <p class="text-sm text-white/90">
-                {{ vibe.description }}
-              </p>
-            </div>
-          </button>
+      <!-- Finale -->
+      <section class="section finale" aria-labelledby="finale-title">
+        <div class="finale-copy reveal-up">
+          <p class="eyebrow">Het einde van de avond</p>
+          <h2 id="finale-title">Afsluiten met een twist.</h2>
+          <p class="section-lede">Na de laatste kaart volgt de eindstand. Wie onderaan staat, krijgt nog één laatste opdracht, gekozen door de winnaar. Daarna: nog een rondje?</p>
         </div>
-      </div>
-    </section>
+        <PhoneDemo :clips="[clips.final]" />
+      </section>
 
-    <!-- Filters & Penalties -->
-    <section class="px-4 py-20 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-6xl">
-        <div class="mb-12 text-center">
-          <h2 class="text-3xl font-semibold text-white">
-            Filters & Straftypes
-          </h2>
-          <p class="mt-4 text-xl text-gray-300">
-            Maak het spel volledig eigen: kies welke vraagtypes je wilt zien en
-            bepaal hoe pittig de straffen worden.
-          </p>
+      <!-- FAQ -->
+      <section id="faq" class="section faq" aria-labelledby="faq-title">
+        <header class="section-head">
+          <p class="eyebrow">Veelgestelde vragen</p>
+          <h2 id="faq-title">Goed om te weten.</h2>
+        </header>
+        <div class="faq-list">
+          <details v-for="item in faq" :key="item.q" class="faq-item">
+            <summary>{{ item.q }}<span aria-hidden="true">+</span></summary>
+            <p>{{ item.a }}</p>
+          </details>
         </div>
-        <div class="grid gap-8 md:grid-cols-2">
-          <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
-            <div class="mb-6 flex items-center justify-between">
-              <h3 class="text-2xl font-semibold text-white">Vraagtypes</h3>
-              <span class="text-xs uppercase tracking-wide text-gray-400"
-                >Minimaal één selecteren</span
-              >
-            </div>
-            <ul class="space-y-5">
-              <li
-                v-for="filter in filterTypes"
-                :key="filter.title"
-                class="flex items-start gap-4"
-              >
-                <span
-                  class="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-2xl"
-                >
-                  {{ filter.icon }}
-                </span>
-                <div>
-                  <p class="font-semibold text-white">{{ filter.title }}</p>
-                  <p class="text-sm text-gray-400">
-                    {{ filter.description }}
-                  </p>
-                </div>
-              </li>
-            </ul>
-            <p class="mt-6 text-sm text-yellow-300">
-              Tip: Spicy & 18+ kunnen heftig zijn. Er is altijd de mogelijkheid
-              om een vraag of opdracht over te slaan.
-            </p>
-          </div>
-          <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
-            <div class="mb-6 flex items-center justify-between">
-              <h3 class="text-2xl font-semibold text-white">Straftypes</h3>
-              <span class="text-xs uppercase tracking-wide text-gray-400"
-                >Combineer en wissel af</span
-              >
-            </div>
-            <ul class="space-y-5">
-              <li
-                v-for="penalty in penaltyTypes"
-                :key="penalty.title"
-                class="flex items-start gap-4"
-              >
-                <span
-                  class="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-2xl"
-                >
-                  {{ penalty.icon }}
-                </span>
-                <div>
-                  <p class="font-semibold text-white">{{ penalty.title }}</p>
-                  <p class="text-sm text-gray-400">
-                    {{ penalty.description }}
-                  </p>
-                </div>
-              </li>
-            </ul>
-            <p class="mt-6 text-sm text-yellow-300">
-              Tip: Speel met meerdere straftypes tegelijk voor maximale
-              spanning.
-            </p>
-          </div>
-        </div>
-        <p class="mt-10 text-center text-sm text-gray-400">
-          Selecteer minstens één vraagtype en één straftype om het spel te
-          starten.
-        </p>
-      </div>
-    </section>
+      </section>
 
-    <!-- Promo -->
-    <section class="relative my-20 px-4 py-32 sm:px-6 lg:px-8">
-      <div
-        class="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--light-background)] to-transparent"
-      />
-      <div class="relative mx-auto max-w-5xl text-center">
-        <div class="relative mx-auto mb-12 h-64 w-64">
-          <div
-            class="animated-gradient absolute inset-0 rounded-full opacity-40 blur-2xl"
-          />
-          <img
-            :src="spel6Logo"
-            alt="SPEL6 Promo"
-            class="relative h-full w-full object-contain drop-shadow-2xl"
-          />
-        </div>
-        <h2 class="mb-6 text-3xl font-semibold text-white">
-          Klaar voor het feest?
-        </h2>
-        <p class="mx-auto mb-8 max-w-3xl text-xl text-gray-300">
-          Sluit je aan bij duizenden spelers die SPEL6 al hebben ontdekt. Geen
-          advertenties, geen abonnementen – alleen pure party vibes en continu
-          nieuwe content.
-        </p>
-        <div class="mx-auto mb-8 grid max-w-4xl gap-4 sm:grid-cols-3">
-          <div
-            v-for="perk in promoHighlights"
-            :key="perk.title"
-            class="rounded-2xl border border-white/10 bg-white/5 p-4 text-center text-sm text-gray-300"
-          >
-            <div class="mb-2 text-2xl">{{ perk.icon }}</div>
-            <p class="font-semibold text-white">{{ perk.title }}</p>
-            <p class="text-xs text-gray-400">{{ perk.description }}</p>
-          </div>
-        </div>
-        <div class="flex flex-col justify-center gap-4 sm:flex-row">
-          <a
-            v-for="store in stores"
-            :key="`promo-${store.label}`"
-             :href="store.href"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center gap-3 rounded-2xl px-8 py-4 text-white transition-all hover:scale-105"
-          >
-            <img :src="store.iconSrc" :alt="store.label" class="h-6 w-auto" />
-            <div class="text-left">
-              <div class="text-sm font-semibold">{{ store.label }}</div>
-              <div class="text-xs text-white/70">{{ store.cta }}</div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Final Feature -->
-    <section class="px-4 py-20 sm:px-6 lg:px-8">
-      <div class="mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-2">
-        <div class="relative">
-          <div
-            class="absolute inset-0 rounded-3xl bg-gradient-to-r from-[var(--vibe-red-light)] to-[var(--vibe-blue-light)] opacity-20 blur-xl"
-          />
-          <ImageWithFallback
-            :src="featureSections[2].image"
-            alt="Groep vrienden"
-            class="relative h-[400px] w-full rounded-3xl object-cover"
-          />
-        </div>
-        <div>
-          <h2 class="mb-6 text-3xl font-semibold text-white">
-            Herinneringen voor het leven
-          </h2>
-          <p class="mb-6 text-lg text-gray-300">
-            SPEL6 draait niet alleen om vragen en challenges. Het gaat om de
-            momenten die je creëert, de verhalen die je deelt en de
-            herinneringen die blijven.
-          </p>
-          <p class="text-lg text-gray-300">
-            Elke keer at je speelt is een nieuw avontuur. Elke vraag brengt je
-            dichter bij elkaar. De spanningen zullen stijgen. Dat is de magie
-            van SPEL6.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Warnings -->
-    <section
-      class="relative overflow-hidden bg-white/5 px-4 py-20 sm:px-6 lg:px-8"
-    >
-      <img
-        :src="spel6GreyLogo"
-        alt=""
-        class="pointer-events-none absolute -right-10 top-1/2 hidden h-72 w-72 -translate-y-1/2 opacity-10 lg:block"
-        aria-hidden="true"
-      />
-      <div class="mx-auto max-w-5xl text-center">
-        <h2 class="text-3xl font-semibold text-white">Let op</h2>
-        <p class="mt-4 text-lg text-gray-300">
-          Sommige gamemodes van SPEL6 zijn bedoeld voor volwassenen en kan
-          inhoud bevatten die niet geschikt is voor alle leeftijden.
-        </p>
-        <div class="mt-12 flex flex-wrap items-center justify-center gap-8">
-          <div
-            v-for="item in warnings"
-            :key="item.label"
-            class="flex flex-col items-center gap-2"
-          >
-            <div
-              class="flex h-20 w-20 items-center justify-center rounded-full border-2 border-white/20 bg-white/10 text-2xl"
-            >
-              {{ item.icon }}
-            </div>
-            <span class="text-sm text-gray-400">{{ item.label }}</span>
-          </div>
-        </div>
-        <p class="mt-8 text-sm text-gray-400">
-          Speel verantwoord. Respecteer de grenzen van anderen.
-        </p>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="px-4 py-20 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-4xl">
-        <div
-          class="rounded-2xl border border-white/10 bg-gradient-to-br from-[var(--vibe-blue-light)]/10 to-[var(--vibe-red-light)]/10 p-8 text-center"
-        >
-          <h2 class="text-3xl font-semibold text-white">Contact</h2>
-          <p class="mt-4 text-xl text-gray-300">
-            Heb je vragen of feedback? We horen graag van je!
-          </p>
-          <NuxtLink
-            to="/contact"
-            class="cta-animated mt-8 inline-flex items-center justify-center rounded-xl px-8 py-3 text-sm font-semibold text-white transition-transform duration-200 hover:scale-105"
-          >
-            Neem contact op
-          </NuxtLink>
-        </div>
-      </div>
-    </section>
+      <!-- Download -->
+      <section id="download" class="download grain" aria-labelledby="download-title">
+        <span class="wordmark download-mark" aria-hidden="true"></span>
+        <h2 id="download-title">Zet de telefoon op tafel.</h2>
+        <p>Download Spel6 en begin vanavond.</p>
+        <StoreButtons center />
+      </section>
+    </main>
 
     <AppFooter />
   </div>
 </template>
 
 <script setup lang="ts">
-import { Check } from "lucide-vue-next";
+import { onBeforeUnmount, onMounted, ref } from "vue";
+import type { DemoClip } from "~/components/PhoneDemo.vue";
 
-const spel6Logo = useStorageAsset("storage/spel6logo.png");
-const appStoreBadge = useStorageAsset("storage/appstore.png");
-const playStoreBadge = useStorageAsset("storage/playstore.png");
-const spel6GreyLogo = useStorageAsset("storage/spel6-grey.png");
+useSeoMeta({
+  title: "Spel6 – het partyspel om elkaar écht te leren kennen",
+  description: "Spel6 is het kaartspel op je telefoon voor vrienden, dates, feestjes en collega's. Zes spelvormen, 815 vragen en 2.183 opdrachten in vier talen.",
+  ogTitle: "Spel6 – leer elkaar écht kennen",
+  ogDescription: "Kies jullie vibe, maak je eigen mix en speel. Voor vrienden, dates, feestjes en collega's.",
+  ogImage: "/images/og.jpg",
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  themeColor: "#151115",
+});
+useHead({ htmlAttrs: { lang: "nl" }, link: [{ rel: "apple-touch-icon", href: "/icons/apple-touch-icon.png" }] });
 
-const stores = [
-  {
-    iconSrc: appStoreBadge,
-    label: "App Store",
-    subtext: "Download in de",
-    cta: "Geen advertenties • Geen abonnement",
-    href: "https://apps.apple.com/us/app/spel-6/id6755892478",
-  },
-  {
-    iconSrc: playStoreBadge,
-    label: "Google Play",
-    subtext: "Download in de",
-    cta: "Geen advertenties • Geen abonnement",
-    href: "https://play.google.com/store/apps/details?id=com.spel.zes",
-  },
+const clip = (name: string, label: string): DemoClip => ({ src: `/demo/${name}.mp4`, poster: `/demo/${name}.jpg`, label });
+const clips = {
+  start: clip("start", "Kies je taal en start"),
+  vibe: clip("vibe", "Kies jullie vibe"),
+  players: clip("players", "Voeg de spelers toe"),
+  gamemode: clip("gamemode", "Maak jullie mix"),
+  filters: clip("filters", "Bepaal de regels"),
+  quiz: clip("quiz", "Onthul het antwoord"),
+  dilemma: clip("dilemma", "Iedereen kiest tegelijk"),
+  penalty: clip("penalty", "Wie verliest, krijgt een opdracht"),
+  final: clip("final", "De eindstand en een laatste twist"),
+};
+const reel = [clips.start, clips.vibe, clips.players, clips.gamemode, clips.filters, clips.quiz, clips.dilemma, clips.penalty, clips.final];
+const reelIndex = ref(0);
+
+const stats = [
+  { value: 815, display: "815", label: "vragen per taal" },
+  { value: 2183, display: "2.183", label: "opdrachten" },
+  { value: 6, display: "6", label: "spelvormen" },
+  { value: 4, display: "4", label: "talen" },
 ];
 
-const friendHighlights = [
-  "Duizenden unieke vragen en challenges",
-  "Voor elk moment de perfecte sfeer",
-  "Van rustig tot volledig uit de hand",
+const steps = [
+  { title: "Kies jullie vibe", text: "Vrienden, date, feest of collega's. De vibe bepaalt welke vragen en opdrachten langskomen.", points: ["Elke vibe een eigen sfeer", "Ook later nog te wisselen"], clip: clips.vibe },
+  { title: "Wie schuiven er aan?", text: "Voeg 2 tot 10 spelers toe. Per speler zet je alcohol en fysieke opdrachten aan of uit.", points: ["Namen komen terug in de vragen", "Niemand hoeft iets wat die niet wil"], clip: clips.players },
+  { title: "Maak jullie mix", text: "Zes spelvormen, van persoonlijke vragen tot een snelle quiz. Kies wat bij jullie avond past.", points: ["Alles aan of juist één spelvorm", "Of laat je verrassen"], clip: clips.gamemode },
+  { title: "Bepaal de regels", text: "Hoe open, gek of persoonlijk mag het worden? Spicy en 18+ vragen eerst om ieders akkoord.", points: ["Een fijne basis staat al klaar", "Kies welke soort opdrachten meedoen"], clip: clips.filters },
 ];
-
-const mobilityHighlights = [
-  "Beschikbaar op iOS en Android",
-  "Personaliseerbaar spel",
-  "Regelmatige updates met nieuwe content",
-];
+const stepIndex = ref(0);
 
 const gameModes = [
-  {
-    title: "Do You Know Me?",
-    description: "Persoonlijke vragen over je vrienden",
-    tagline: "Persoonlijk",
-    emoji: "🎭",
-    surface:
-      "bg-purple-700 border-purple-900/70 shadow-[0_0_24px_rgba(123,76,204,0.45)]",
-  },
-  {
-    title: "Chaos Crew",
-    description: "Iedereen doet mee. Opdrachten, actie, pure chaos!",
-    tagline: "Party Challenges",
-    emoji: "👊",
-    surface:
-      "bg-pink-700 border-pink-900/70 shadow-[0_0_24px_rgba(225,64,146,0.45)]",
-  },
-  {
-    title: "SongBird",
-    description:
-      "Herken het lied door twee zinnen, soms is het ook nog vertaald...",
-    tagline: "Music Quiz",
-    emoji: "🎤",
-    surface:
-      "bg-amber-600 border-amber-800/70 shadow-[0_0_24px_rgba(255,175,64,0.4)]",
-  },
-  {
-    title: "Quizmaster",
-    description: "Pubquiz-vibes met verrassende thema's.",
-    tagline: "Trivia",
-    emoji: "🤔",
-    surface:
-      "bg-cyan-800 border-cyan-900/70 shadow-[0_0_24px_rgba(56,189,248,0.35)]",
-  },
-  {
-    title: "Dilemma Duel",
-    description: "Kies een kant, de meerderheid wint deze opdracht.",
-    tagline: "Discussie",
-    emoji: "💬",
-    surface:
-      "bg-red-700 border-red-900/70 shadow-[0_0_24px_rgba(220,38,38,0.45)]",
-  },
-  {
-    title: "Most Likely To",
-    description: "Wie o wie zou het doen? Wijs die persoon tegelijkertijd aan.",
-    tagline: "Party Votes",
-    emoji: "💥",
-    surface:
-      "bg-green-800 border-green-900/70 shadow-[0_0_24px_rgba(34,197,94,0.4)]",
-  },
+  { code: "knowme", title: "Do You Know Me?", tag: "Persoonlijk", accent: "#c4a9e4", text: "Hoe goed kennen jullie elkaar? Iedereen raadt het antwoord van één speler.", example: "Van welk klein dagelijks moment wordt Noor blij?" },
+  { code: "chaos", title: "Chaos Crew", tag: "Actie", accent: "#eea0af", text: "Groepsopdrachten en mini-uitdagingen. Iedereen doet tegelijk mee.", example: "Vertel om de beurt een mop zonder te lachen." },
+  { code: "songbird", title: "SongBird", tag: "Muziek", accent: "#e8c57f", text: "Herken de hit achter een fragment uit de songtekst. Wie het eerst raadt, wint.", example: "Een regel uit een bekende Nederlandse hit. Welk nummer is het?" },
+  { code: "quiz", title: "Quizmaster", tag: "Kennis", accent: "#a1cbd7", text: "Een kleine pubquiz met vier antwoorden. Grote discussies gegarandeerd.", example: "Wat is de hoofdstad van Australië?" },
+  { code: "dilemma", title: "Dilemma Duel", tag: "Kiezen", accent: "#eeb295", text: "Twee opties, één keuze. De minderheid krijgt een opdracht.", example: "Elke week verhuizen of nooit meer je geboorteplaats uit?" },
+  { code: "likely", title: "Most Likely To", tag: "Wijzen", accent: "#c6d29a", text: "Wie zou het eerst…? Wijs tegelijk iemand aan. Meeste stemmen krijgt een opdracht.", example: "Wie zou een roadtrip starten zonder iets te plannen?" },
+] as const;
+
+const inGame = [
+  { title: "Onthul het antwoord", text: "Iedereen kiest, één tik op de knop en je weet wie gelijk had.", clip: clips.quiz },
+  { title: "Iedereen kiest tegelijk", text: "Bij een dilemma stem je per speler A of B. De meerderheid scoort.", clip: clips.dilemma },
+  { title: "Een opdracht op maat", text: "Wie verliest, krijgt een opdracht die past bij jullie regels en voorkeuren.", clip: clips.penalty },
 ];
 
-const whySpel6Points = [
-  {
-    title: "Betaalbaarder dan andere spellen",
-    description:
-      "Goedkoper dan fysieke spellen, minder ruimte, meer lol en meer opties.",
-    icon: "💸",
-    accent: "bg-[var(--vibe-green-light)]/15 text-[var(--vibe-green-light)]",
-  },
-  {
-    title: "Altijd up-to-date",
-    description:
-      "Nieuwe vragen, opdrachten, gamemodes en functies blijven komen dankzij regelmatige updates.",
-    icon: "🌀",
-    accent: "bg-[var(--vibe-blue-light)]/15 text-[var(--vibe-blue-light)]",
-  },
-  {
-    title: "Filters voor elke mood",
-    description:
-      "Elke gamemode heeft eigen filters en toon. Geen generieke vragen, maar precies wat past bij het moment.",
-    icon: "🔍",
-    accent: "bg-[var(--vibe-yellow-light)]/15 text-[var(--vibe-yellow-light)]",
-  },
+const vibes = [
+  { title: "Vrienden", text: "Je denkt dat je ze kent.", image: "/images/friends.webp", alt: "Vrienden lachen samen aan tafel" },
+  { title: "Date", text: "Sla de smalltalk maar over.", image: "/images/whisper-v2.webp", alt: "Twee mensen fluisteren elkaar iets toe" },
+  { title: "Feest", text: "Laat de avond maar gebeuren.", image: "/images/party-v2.webp", alt: "Vrienden proosten op een feest" },
+  { title: "Collega's", text: "Even geen werkpraat.", image: "/images/colleagues-v1.webp", alt: "Collega's lachen samen na het werk" },
 ];
 
-const promoHighlights = [
-  {
-    title: "Betaalbare keuze",
-    description: "Goedkoper dan stapels fysieke kaartspellen.",
-    icon: "💸",
-  },
-  {
-    title: "Altijd nieuw",
-    description: "Updates brengen verse vragen en gamemodes.",
-    icon: "♻️",
-  },
-  {
-    title: "Slimme content",
-    description: "Vragen en opdrachten passen perfect bij elke sfeer.",
-    icon: "✨",
-  },
+const filters = [
+  { name: "Normaal", kind: "" },
+  { name: "Diepgaand", kind: "" },
+  { name: "Onverwachte twist", kind: "" },
+  { name: "Spicy", kind: "chip-warm" },
+  { name: "18+", kind: "chip-warm" },
 ];
 
-const finalFeatureImage = useStorageAsset("storage/img5.png");
-const mobilityImage = useStorageAsset("storage/img6.png");
-const friendsFeatureImage = useStorageAsset("storage/img7.png");
-
-const setupVibes = [
-  {
-    title: "Feest",
-    subtitle: "Party Mode",
-    description: "Een avond vol lol en om steeds minder te herinneren.",
-    emoji: "🍸",
-    bgLight: "var(--vibe-yellow-light)",
-  },
-  {
-    title: "Vrienden",
-    subtitle: "Friends Deep Dive",
-    description:
-      "Ook al kennen jullie elkaar goed. Onthoud: niemand is veilig.",
-    emoji: "🤝",
-    bgLight: "var(--vibe-green-light)",
-  },
-  {
-    title: "Collega's",
-    subtitle: "Work Mode",
-    description: "Na werktijd alsnog met ze opgescheept...",
-    emoji: "👔",
-    bgLight: "var(--vibe-blue-light)",
-  },
-  {
-    title: "Date",
-    subtitle: "Date Night",
-    description:
-      "Een avond zonder ongemakkelijke stiltes en vol spanning en gebroken ijs.",
-    emoji: "❤️",
-    bgLight: "var(--vibe-red-light)",
-  },
+const faq = [
+  { q: "Wat is Spel6?", a: "Een kaartspel op je telefoon voor aan tafel. Je leest om de beurt een kaart voor: een vraag, een dilemma, een quizvraag of een groepsopdracht. Wie verliest, krijgt een opdracht." },
+  { q: "Met hoeveel mensen speel je?", a: "Met 2 tot 10 spelers. Iedereen speelt op één telefoon die rondgaat of op tafel ligt." },
+  { q: "In welke talen kan ik spelen?", a: "In het Nederlands, Engels, Duits en Spaans. Je kiest de taal op het startscherm." },
+  { q: "Is het geschikt voor collega's of familie?", a: "Ja. Kies de vibe Collega's en laat Spicy en 18+ uit. Die staan nooit vanzelf aan; ze vragen eerst om het akkoord van iedereen." },
+  { q: "Moet iedereen drinken?", a: "Nee. Per speler zet je alcohol en fysieke opdrachten aan of uit. Wie niet drinkt, krijgt geen drinkopdrachten." },
+  { q: "Heb ik internet nodig?", a: "Nee, alle kaarten zitten in de app. Ben je online, dan komen er nieuwe vragen bij." },
 ];
 
-const filterTypes = [
-  {
-    title: "18+",
-    description: "18+ onderwerpen of seksueel getinte opdrachten & vragen.",
-    icon: "🔥",
-  },
-  {
-    title: "Normaal",
-    description: "Mildere vragen & opdrachten voor een rustige mood.",
-    icon: "✅",
-  },
-  {
-    title: "Spicy",
-    description: "Seksueel getinte vragen & opdrachten.",
-    icon: "🌶️",
-  },
-  {
-    title: "Diepgaand",
-    description: "Emotionele of serieuzere vragen & opdrachten.",
-    icon: "💬",
-  },
-  {
-    title: "Random Straf",
-    description: "Soms krijg je plots een straf zonder duidelijke reden.",
-    icon: "🎲",
-  },
-];
+const root = ref<HTMLElement | null>(null);
+let cleanup: (() => void) | undefined;
 
-const penaltyTypes = [
-  {
-    title: "Drinken",
-    description: "Neem een (x) aantal slokken (alcohol)",
-    icon: "🍻",
-  },
-  {
-    title: "Vraag",
-    description: "Krijg een extra persoonlijke of ongemakkelijke vraag.",
-    icon: "❓",
-  },
-  {
-    title: "Genant",
-    description: "Vertel een genant verhaal of beantwoord een genante vraag.",
-    icon: "😳",
-  },
-  {
-    title: "Dare",
-    description: "Voer een opdracht uit, van mild tot outrageous tot extreme.",
-    icon: "🎯",
-  },
-  {
-    title: "Acteren",
-    description: "Doe een mini performance of speel een scène na.",
-    icon: "🎭",
-  },
-  {
-    title: "Persoonlijk",
-    description:
-      "Beantwoord een persoonlijke vraag of geef iemand een persoonlijk compliment.",
-    icon: "💌",
-  },
-];
+onMounted(async () => {
+  const { gsap } = await import("gsap");
+  const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+  gsap.registerPlugin(ScrollTrigger);
+  const media = gsap.matchMedia();
+  const ctx = gsap.context(() => {
+    // Which step's recording the sticky phone shows.
+    gsap.utils.toArray<HTMLElement>(".how-step").forEach((el) => {
+      ScrollTrigger.create({ trigger: el, start: "top 55%", end: "bottom 55%", onToggle: (self) => { if (self.isActive) stepIndex.value = Number(el.dataset.step); } });
+    });
 
-const featureSections = [
-  {
-    image: friendsFeatureImage,
-  },
-  {
-    image: mobilityImage,
-  },
-  {
-    image: finalFeatureImage,
-  },
-];
-
-const warnings = [
-  { label: "18 jaar en ouder", icon: "18+" },
-  { label: "Alcohol", icon: "🍺" },
-  { label: "Cannabis", icon: "🌿" },
-  { label: "Expliciete inhoud", icon: "💋" },
-  { label: "Kijkwijzer", icon: "👁️" },
-];
+    media.add("(prefers-reduced-motion: no-preference)", () => {
+      gsap.from(".hero-copy > *", { y: 24, opacity: 0, duration: .8, stagger: .08, ease: "power3.out" });
+      gsap.from(".hero-phone", { y: 50, rotation: 4, opacity: 0, duration: 1.1, ease: "power3.out", delay: .15 });
+      gsap.from(".hero-photo", { scale: 1.08, opacity: 0, duration: 1.4, stagger: .1, ease: "power2.out" });
+      gsap.to(".hero-photos", { yPercent: 18, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+      gsap.utils.toArray<HTMLElement>(".reveal-up").forEach((el) => {
+        gsap.from(el, { y: 40, opacity: 0, duration: .8, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%" } });
+      });
+      gsap.utils.toArray<HTMLElement>(".stat-value").forEach((el) => {
+        const value = Number(el.dataset.value);
+        const counter = { n: 0 };
+        gsap.to(counter, { n: value, duration: 1.4, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 90%" }, onUpdate: () => { el.textContent = Math.round(counter.n).toLocaleString("nl-NL"); } });
+      });
+    });
+  }, root.value!);
+  cleanup = () => { ctx.revert(); media.revert(); };
+});
+onBeforeUnmount(() => cleanup?.());
 </script>
+
+<style scoped>
+.page { background: var(--ink); color: var(--cream); overflow-x: clip; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.eyebrow { margin-bottom: 14px; color: #efb5a8; font-size: .78rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+em { font-style: normal; background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* Hero */
+.hero { position: relative; isolation: isolate; min-height: 100svh; display: flex; align-items: center; overflow: hidden; padding: 110px 0 70px; }
+.hero-photos { position: absolute; inset: 0; z-index: -1; }
+.hero-photo { position: absolute; width: clamp(180px, 22vw, 320px); aspect-ratio: 4 / 5; object-fit: cover; border-radius: 22px; filter: saturate(.85) brightness(.55); }
+.hp-1 { top: 7%; left: -3%; transform: rotate(-7deg); }
+.hp-2 { bottom: -6%; left: 12%; transform: rotate(5deg); }
+.hp-3 { top: -6%; right: 22%; transform: rotate(6deg); }
+.hp-4 { bottom: 4%; right: -4%; transform: rotate(-5deg); }
+.hero-glow { position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 45%, #151115 0%, #151115e6 30%, #151115b0 55%, #15111540 85%); }
+.hero-inner { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 48px; width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+.hero-copy h1 { font-size: clamp(2.6rem, 6.4vw, 5.2rem); font-weight: 600; line-height: 1.02; letter-spacing: -2.5px; text-wrap: balance; }
+.lede { max-width: 520px; margin: 22px 0 32px; color: #cdbdb4; font-size: clamp(1.02rem, 1.6vw, 1.2rem); line-height: 1.6; }
+.hero-note { margin-top: 18px; color: #9b8a83; font-size: .85rem; }
+.hero-phone { display: grid; justify-items: center; gap: 16px; }
+.reel-steps { display: flex; gap: 5px; }
+.reel-steps li { width: 18px; height: 3px; border-radius: 3px; background: #ffffff22; transition: background .3s, width .3s; }
+.reel-steps li.done { background: #efb5a880; }
+.reel-steps li.active { width: 34px; background: #f28c85; }
+.reel-label { min-height: 1.4em; color: #cdbdb4; font-size: .88rem; }
+
+/* Stats */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); width: min(1180px, calc(100% - 40px)); margin: 0 auto; border-block: 1px solid #ffffff12; }
+.stat { display: grid; gap: 4px; padding: 30px 12px; text-align: center; }
+.stat + .stat { border-left: 1px solid #ffffff12; }
+.stat strong { font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; letter-spacing: -1.5px; background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; font-variant-numeric: tabular-nums; }
+.stat span { color: #b3a29a; font-size: .9rem; }
+
+/* Sections */
+.section { position: relative; width: min(1180px, calc(100% - 40px)); margin: 0 auto; padding: 120px 0 0; }
+.section-head { max-width: 640px; margin: 0 auto 56px; text-align: center; }
+.section-head h2, .finale h2 { font-size: clamp(2rem, 4.4vw, 3.3rem); font-weight: 600; line-height: 1.08; letter-spacing: -1.6px; text-wrap: balance; }
+.section-lede { margin-top: 16px; color: #b3a29a; font-size: 1.08rem; line-height: 1.6; }
+
+/* How it works */
+.how-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.how-steps { display: grid; }
+.how-step { min-height: 72vh; display: flex; flex-direction: column; justify-content: center; padding: 20px 0; opacity: .35; transition: opacity .4s; }
+.how-step.active { opacity: 1; }
+.how-num { color: #f28c85; font-size: .9rem; font-weight: 600; letter-spacing: 2px; }
+.how-step h3 { margin: 10px 0 12px; font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 600; letter-spacing: -1px; }
+.how-step > p { max-width: 440px; color: #cdbdb4; font-size: 1.05rem; line-height: 1.6; }
+.how-step ul { display: grid; gap: 8px; margin-top: 20px; }
+.how-step ul li { display: flex; align-items: center; gap: 10px; color: #b3a29a; font-size: .95rem; }
+.how-step ul li::before { content: ""; width: 18px; height: 18px; flex-shrink: 0; border-radius: 50%; background: #f28c8526 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23f28c85' stroke-width='1.6'%3E%3Cpath d='m3 6 2 2 4-4'/%3E%3C/svg%3E") center / 12px no-repeat; }
+.how-sticky { position: sticky; top: 12vh; height: 76vh; display: grid; place-items: center; }
+.how-inline-phone { display: none; }
+
+/* Game modes */
+.modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.mode { display: flex; flex-direction: column; padding: 26px; border: 1px solid #ffffff12; border-radius: 24px; background: radial-gradient(ellipse at 85% 0%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 60%), var(--ink-2); transition: transform .3s, border-color .3s; }
+.mode:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+.mode-art { width: 150px; height: 104px; margin: -4px 0 14px -6px; }
+.mode h3 { font-size: 1.35rem; font-weight: 600; letter-spacing: -.5px; }
+.mode-tag { margin: 4px 0 12px; color: var(--accent); font-size: .78rem; font-weight: 600; letter-spacing: 1.4px; text-transform: uppercase; }
+.mode > p:not(.mode-tag):not(.mode-example) { color: #cdbdb4; line-height: 1.55; }
+.mode-example { margin-top: auto; padding-top: 18px; color: #f5eee5; font-size: .95rem; line-height: 1.45; }
+.mode-example::before { content: "“"; color: var(--accent); }
+.mode-example::after { content: "”"; color: var(--accent); }
+
+/* Try */
+.try { padding-bottom: 20px; }
+
+/* In the game */
+.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; justify-items: center; }
+.trio-item { display: grid; justify-items: center; gap: 22px; text-align: center; }
+.trio-item figcaption { max-width: 280px; color: #b3a29a; line-height: 1.55; }
+.trio-item figcaption strong { display: block; margin-bottom: 6px; color: #f5eee5; font-size: 1.15rem; font-weight: 600; }
+
+/* Vibes */
+.vibes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.vibe { position: relative; overflow: hidden; aspect-ratio: 3 / 4; border-radius: 22px; }
+.vibe img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+.vibe:hover img { transform: scale(1.05); }
+.vibe::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, #151115e6); }
+.vibe-copy { position: absolute; left: 18px; right: 18px; bottom: 18px; z-index: 1; }
+.vibe h3 { font-size: 1.5rem; font-weight: 600; letter-spacing: -.5px; }
+.vibe p { color: #d9c9c0; font-size: .92rem; }
+.limits { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+.limit { padding: 26px; border: 1px solid #ffffff12; border-radius: 22px; background: var(--ink-2); }
+.limit h3 { font-size: 1.2rem; font-weight: 600; }
+.limit p { margin-top: 14px; color: #b3a29a; line-height: 1.6; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.chip { padding: 7px 13px; border: 1px solid #ffffff1c; border-radius: 99px; color: #e8dbd2; font-size: .85rem; }
+.chip-warm { border-color: #f28c8566; color: #ffc9bd; background: #f28c8514; }
+
+/* Finale */
+.finale { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 60px; }
+.finale-copy { max-width: 520px; }
+
+/* FAQ */
+.faq-list { display: grid; gap: 10px; max-width: 760px; margin: 0 auto; }
+.faq-item { border: 1px solid #ffffff12; border-radius: 18px; background: var(--ink-2); }
+.faq-item summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 64px; padding: 16px 22px; cursor: pointer; font-size: 1.05rem; font-weight: 500; list-style: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary span { color: #f28c85; font-size: 1.4rem; transition: transform .25s; }
+.faq-item[open] summary span { transform: rotate(45deg); }
+.faq-item p { padding: 0 22px 20px; color: #b3a29a; line-height: 1.65; }
+.faq-item summary:focus-visible { outline: 2px solid #f28c85; outline-offset: 2px; border-radius: 18px; }
+
+/* Download */
+.download { position: relative; isolation: isolate; overflow: hidden; display: grid; justify-items: center; gap: 14px; width: min(1180px, calc(100% - 40px)); margin: 120px auto 100px; padding: 72px 24px; border-radius: 32px; text-align: center; background: radial-gradient(ellipse at 50% 120%, #f28c8540, transparent 60%), radial-gradient(ellipse at 10% 0%, #8c4c6640, transparent 50%), var(--ink-2); border: 1px solid #ffffff12; }
+.download-mark { width: 150px; margin-bottom: 10px; }
+.download h2 { font-size: clamp(2rem, 4.4vw, 3.3rem); font-weight: 600; letter-spacing: -1.6px; }
+.download p { margin-bottom: 14px; color: #cdbdb4; font-size: 1.1rem; }
+
+@media (max-width: 960px) {
+  .hero { padding-top: 96px; }
+  .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+  .hero-copy { display: grid; justify-items: center; }
+  .lede { margin-inline: auto; }
+  .hero-copy :deep(.stores) { justify-content: center; }
+  .hp-2, .hp-3 { display: none; }
+  .how-grid { grid-template-columns: 1fr; }
+  .how-sticky { display: none; }
+  .how-step { min-height: 0; opacity: 1; padding: 0 0 72px; align-items: center; text-align: center; }
+  .how-step ul { justify-items: center; }
+  .how-inline-phone { display: block; margin-top: 32px; }
+  .modes { grid-template-columns: repeat(2, 1fr); }
+  .trio { grid-template-columns: 1fr; gap: 56px; }
+  .vibes { grid-template-columns: repeat(2, 1fr); }
+  .finale { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 40px; }
+}
+@media (max-width: 640px) {
+  .section, .stats, .hero-inner, .download { width: calc(100% - 32px); }
+  .section { padding-top: 88px; }
+  .section-head { margin-bottom: 40px; }
+  .hero-copy h1 { letter-spacing: -1.6px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .stat:nth-child(3) { border-left: 0; }
+  .stat:nth-child(n + 3) { border-top: 1px solid #ffffff12; }
+  .modes, .limits { grid-template-columns: 1fr; }
+  .mode { padding: 22px; }
+  .vibes { gap: 10px; }
+  .vibe-copy { left: 14px; right: 14px; bottom: 14px; }
+  .vibe h3 { font-size: 1.2rem; }
+  .vibe p { font-size: .8rem; }
+  .download { margin: 88px auto 72px; padding: 56px 18px; border-radius: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .how-step, .mode, .vibe img, .reel-steps li, .faq-item summary span { transition: none; }
+  .mode:hover { transform: none; }
+}
+</style>

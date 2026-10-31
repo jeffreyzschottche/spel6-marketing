@@ -1,124 +1,66 @@
 <template>
-  <nav
-    :class="[
-      'fixed inset-x-0 top-0 z-50 border-b transition-all duration-300',
-      isScrolled ? 'bg-black/80 border-white/10 backdrop-blur-lg' : 'border-transparent bg-transparent'
-    ]"
-  >
-    <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-      <NuxtLink to="/" class="flex items-center gap-3">
-        <div class="logo-pulse p-1 sm:p-1.5">
-          <img :src="spel6Logo" alt="SPEL6" class="h-12 w-auto sm:h-14 lg:h-16" />
-        </div>
-      </NuxtLink>
-
-      <div class="hidden items-center gap-8 md:flex">
-        <template v-for="link in navLinks" :key="link.path">
-          <span
-            v-if="link.disabled"
-            class="text-sm font-medium text-gray-600/70 cursor-not-allowed"
-          >
-            {{ link.name }}
-          </span>
-          <NuxtLink
-            v-else
-            :to="link.path"
-            class="relative text-sm font-medium transition-colors"
-            :class="isActive(link.path) ? 'text-white' : 'text-gray-400 hover:text-white'"
-          >
-            {{ link.name }}
-            <div
-              v-if="isActive(link.path)"
-              class="animated-gradient absolute -bottom-1 left-0 right-0 h-0.5 rounded-full"
-            />
-          </NuxtLink>
-        </template>
-      </div>
-
-      <button
-        class="rounded-full p-2 text-white transition hover:bg-white/10 md:hidden"
-        type="button"
-        @click="toggleMobileMenu"
-      >
-        <component :is="isMobileMenuOpen ? X : Menu" class="h-6 w-6" />
+  <header class="nav" :class="{ 'nav-solid': scrolled || open }">
+    <div class="nav-inner">
+      <NuxtLink to="/" class="nav-brand" aria-label="Spel6, naar de homepage"><span class="wordmark" aria-hidden="true"></span></NuxtLink>
+      <nav class="nav-links" aria-label="Hoofdmenu">
+        <NuxtLink v-for="link in links" :key="link.to" :to="link.to" class="nav-link">{{ link.name }}</NuxtLink>
+      </nav>
+      <NuxtLink to="/#download" class="nav-cta">Download</NuxtLink>
+      <button type="button" class="nav-toggle" :aria-expanded="open" aria-controls="mobile-menu" :aria-label="open ? 'Menu sluiten' : 'Menu openen'" @click="open = !open">
+        <span :class="{ open }" aria-hidden="true"></span>
       </button>
     </div>
-
-    <div
-      v-if="isMobileMenuOpen"
-      class="border-t border-white/10 bg-black/95 px-4 py-6 text-base text-gray-200 md:hidden"
-    >
-      <template v-for="link in navLinks" :key="`mobile-${link.path}`">
-        <span
-          v-if="link.disabled"
-          class="block py-2 text-gray-600/70 cursor-not-allowed"
-        >
-          {{ link.name }}
-        </span>
-        <NuxtLink
-          v-else
-          :to="link.path"
-          class="block py-2"
-          :class="isActive(link.path) ? 'text-white' : 'hover:text-white'"
-          @click="closeMobileMenu"
-        >
-          {{ link.name }}
-        </NuxtLink>
-      </template>
-    </div>
-  </nav>
+    <nav v-show="open" id="mobile-menu" class="nav-mobile" aria-label="Mobiel menu">
+      <NuxtLink v-for="link in links" :key="link.to" :to="link.to" @click="open = false">{{ link.name }}</NuxtLink>
+      <NuxtLink to="/#download" class="nav-mobile-cta" @click="open = false">Download de app</NuxtLink>
+    </nav>
+  </header>
 </template>
 
 <script setup lang="ts">
-import { Menu, X } from "lucide-vue-next";
 import { onBeforeUnmount, onMounted, ref, watch } from "vue";
-import { useRoute } from "#imports";
 
-const spel6Logo = useStorageAsset("storage/spel6logo.png");
-const navLinks = [
-  { name: "Home", path: "/" },
-  { name: "Shop", path: "/shop", disabled: true },
-  { name: "Guide", path: "/guide" },
-  { name: "FAQ", path: "/faq" },
-  { name: "Contact", path: "/contact" },
+const links = [
+  { name: "Zo werkt het", to: "/#zo-werkt-het" },
+  { name: "Spelvormen", to: "/#spelvormen" },
+  { name: "Probeer een kaart", to: "/#probeer" },
+  { name: "FAQ", to: "/#faq" },
+  { name: "Contact", to: "/contact" },
 ];
 
 const route = useRoute();
-const isScrolled = ref(false);
-const isMobileMenuOpen = ref(false);
+const scrolled = ref(false);
+const open = ref(false);
+const onScroll = () => { scrolled.value = window.scrollY > 16; };
 
-const handleScroll = () => {
-  if (!import.meta.client) return;
-  isScrolled.value = window.scrollY > 20;
-};
-
-onMounted(() => {
-  if (!import.meta.client) return;
-  window.addEventListener("scroll", handleScroll);
-  handleScroll();
-});
-
-onBeforeUnmount(() => {
-  if (!import.meta.client) return;
-  window.removeEventListener("scroll", handleScroll);
-});
-
-function isActive(path: string) {
-  return route.path === path;
-}
-
-function toggleMobileMenu() {
-  isMobileMenuOpen.value = !isMobileMenuOpen.value;
-}
-
-function closeMobileMenu() {
-  isMobileMenuOpen.value = false;
-}
-
-watch(
-  () => route.fullPath,
-  () => {
-    isMobileMenuOpen.value = false;
-  }
-);
+onMounted(() => { window.addEventListener("scroll", onScroll, { passive: true }); onScroll(); });
+onBeforeUnmount(() => window.removeEventListener("scroll", onScroll));
+watch(() => route.fullPath, () => { open.value = false; });
 </script>
+
+<style scoped>
+.nav { position: fixed; inset: 0 0 auto; z-index: 50; transition: background .3s, border-color .3s, backdrop-filter .3s; border-bottom: 1px solid transparent; }
+.nav-solid { background: #151115d9; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom-color: #ffffff12; }
+.nav-inner { display: flex; align-items: center; gap: 28px; width: min(1180px, calc(100% - 40px)); height: 72px; margin: 0 auto; }
+.nav-brand { width: 104px; flex-shrink: 0; }
+.nav-links { display: flex; gap: 4px; margin-left: auto; }
+.nav-link { padding: 10px 12px; border-radius: 10px; color: #cdbdb4; font-size: .9rem; transition: color .2s, background .2s; }
+.nav-link:hover { color: #fff3e6; background: #ffffff0a; }
+.nav-cta { padding: 11px 18px; border-radius: 12px; background: var(--cta-gradient); color: #2c1520; font-weight: 600; font-size: .9rem; box-shadow: 0 10px 26px -12px #f28c85aa; transition: transform .2s; }
+.nav-cta:hover { transform: translateY(-1px); }
+.nav-toggle { display: none; width: 44px; height: 44px; margin-left: auto; border-radius: 12px; }
+.nav-toggle span, .nav-toggle span::before { position: relative; display: block; width: 20px; height: 1.5px; margin: auto; background: #f5eee5; transition: transform .25s; }
+.nav-toggle span::before { content: ""; position: absolute; top: 6px; }
+.nav-toggle span.open { transform: translateY(3px) rotate(45deg); }
+.nav-toggle span.open::before { transform: translateY(-6px) rotate(-90deg); }
+.nav-mobile { display: grid; gap: 2px; padding: 8px 20px 22px; }
+.nav-mobile a { padding: 14px 4px; border-bottom: 1px solid #ffffff10; color: #e8dbd2; font-size: 1.05rem; }
+.nav-mobile .nav-mobile-cta { margin-top: 12px; border: 0; border-radius: 14px; background: var(--cta-gradient); color: #2c1520; text-align: center; font-weight: 600; }
+a:focus-visible, button:focus-visible { outline: 2px solid #f28c85; outline-offset: 3px; }
+@media (max-width: 900px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-toggle { display: grid; }
+  .nav-inner { height: 64px; width: calc(100% - 32px); }
+}
+@media (prefers-reduced-motion: reduce) { .nav, .nav-cta, .nav-toggle span, .nav-toggle span::before { transition: none; } }
+</style>
